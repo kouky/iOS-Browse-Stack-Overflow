@@ -33,6 +33,10 @@
 		270A473018974A1D00D9CB53 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A472E18974A1D00D9CB53 /* Answer.m */; };
 		270A473318977EAC00D9CB53 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A473218977EAC00D9CB53 /* Topic.m */; };
 		270A473418977EAC00D9CB53 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A473218977EAC00D9CB53 /* Topic.m */; };
+		271DADC01899AB51009F0F65 /* QuestionCreationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADBF1899AB51009F0F65 /* QuestionCreationTests.m */; };
+		271DADC41899B002009F0F65 /* StackOverflowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADC31899B002009F0F65 /* StackOverflowManager.m */; };
+		271DADC51899B002009F0F65 /* StackOverflowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADC31899B002009F0F65 /* StackOverflowManager.m */; };
+		277E2004189A22960042983A /* MockStackoverflowManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 277E2003189A22960042983A /* MockStackoverflowManagerDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +82,12 @@
 		270A472E18974A1D00D9CB53 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
 		270A473118977EAC00D9CB53 /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
 		270A473218977EAC00D9CB53 /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
+		271DADBF1899AB51009F0F65 /* QuestionCreationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCreationTests.m; sourceTree = "<group>"; };
+		271DADC21899B002009F0F65 /* StackOverflowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowManager.h; sourceTree = "<group>"; };
+		271DADC31899B002009F0F65 /* StackOverflowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackOverflowManager.m; sourceTree = "<group>"; };
+		277E1FFD189A136D0042983A /* StackOverflowManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowManagerDelegate.h; sourceTree = "<group>"; };
+		277E2002189A22960042983A /* MockStackoverflowManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockStackoverflowManagerDelegate.h; sourceTree = "<group>"; };
+		277E2003189A22960042983A /* MockStackoverflowManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockStackoverflowManagerDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +160,9 @@
 				270A47281897212000D9CB53 /* Person.m */,
 				270A47211896FE6B00D9CB53 /* Question.h */,
 				270A47221896FE6B00D9CB53 /* Question.m */,
+				271DADC21899B002009F0F65 /* StackOverflowManager.h */,
+				271DADC31899B002009F0F65 /* StackOverflowManager.m */,
+				277E1FFD189A136D0042983A /* StackOverflowManagerDelegate.h */,
 				270A473118977EAC00D9CB53 /* Topic.h */,
 				270A473218977EAC00D9CB53 /* Topic.m */,
 				270A46FC18948D0400D9CB53 /* Images.xcassets */,
@@ -175,7 +188,9 @@
 				270A472B189749F300D9CB53 /* AnswerTests.m */,
 				270A47251897208B00D9CB53 /* PersonTests.m */,
 				270A471F1896FDF400D9CB53 /* QuestionTests.m */,
+				271DADBF1899AB51009F0F65 /* QuestionCreationTests.m */,
 				270A471918949C7700D9CB53 /* TopicTests.m */,
+				277E2001189A21EE0042983A /* Mocks */,
 				270A470A18948D0400D9CB53 /* Supporting Files */,
 			);
 			path = BrowseOverflowTests;
@@ -188,6 +203,15 @@
 				270A470C18948D0400D9CB53 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		277E2001189A21EE0042983A /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				277E2002189A22960042983A /* MockStackoverflowManagerDelegate.h */,
+				277E2003189A22960042983A /* MockStackoverflowManagerDelegate.m */,
+			);
+			name = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +318,7 @@
 				270A472F18974A1D00D9CB53 /* Answer.m in Sources */,
 				270A46EE18948D0400D9CB53 /* main.m in Sources */,
 				270A47231896FE6B00D9CB53 /* Question.m in Sources */,
+				271DADC41899B002009F0F65 /* StackOverflowManager.m in Sources */,
 				270A46FB18948D0400D9CB53 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,10 +329,13 @@
 			files = (
 				270A472C189749F300D9CB53 /* AnswerTests.m in Sources */,
 				270A473418977EAC00D9CB53 /* Topic.m in Sources */,
+				277E2004189A22960042983A /* MockStackoverflowManagerDelegate.m in Sources */,
 				270A472A1897212000D9CB53 /* Person.m in Sources */,
 				270A471A18949C7700D9CB53 /* TopicTests.m in Sources */,
 				270A473018974A1D00D9CB53 /* Answer.m in Sources */,
 				270A47241896FE6B00D9CB53 /* Question.m in Sources */,
+				271DADC51899B002009F0F65 /* StackOverflowManager.m in Sources */,
+				271DADC01899AB51009F0F65 /* QuestionCreationTests.m in Sources */,
 				270A47201896FDF400D9CB53 /* QuestionTests.m in Sources */,
 				270A47261897208B00D9CB53 /* PersonTests.m in Sources */,
 			);
@@ -510,6 +538,7 @@
 				270A471518948D0400D9CB53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		270A471618948D0400D9CB53 /* Build configuration list for PBXNativeTarget "BrowseOverflowTests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +547,7 @@
 				270A471818948D0400D9CB53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
