@@ -9,8 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "StackOverflowManagerDelegate.h"
 
+@class StackOverflowCommunicator;
+@class Topic;
+
 @interface StackOverflowManager : NSObject
 
 @property (nonatomic, weak) id <StackOverflowManagerDelegate> delegate;
+@property (nonatomic, strong) StackOverflowCommunicator *communicator;
+
+- (void)fetchQuestionsOnTopic:(Topic *)topic;
+- (void)searchingForQuestionsFailedWithError:(NSError *)error;
 
 @end
+
+extern NSString *StackOverflowManagerError;
+
+enum {
+    StackOverflowManagerErrorQuestionSearchCode
+};

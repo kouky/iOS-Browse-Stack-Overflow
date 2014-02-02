@@ -37,6 +37,9 @@
 		271DADC41899B002009F0F65 /* StackOverflowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADC31899B002009F0F65 /* StackOverflowManager.m */; };
 		271DADC51899B002009F0F65 /* StackOverflowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADC31899B002009F0F65 /* StackOverflowManager.m */; };
 		277E2004189A22960042983A /* MockStackoverflowManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 277E2003189A22960042983A /* MockStackoverflowManagerDelegate.m */; };
+		27DCCBFE189B596D00263241 /* MockStackoverflowCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DCCBFD189B596D00263241 /* MockStackoverflowCommunicator.m */; };
+		27DCCC01189B5DC300263241 /* StackOverflowCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DCCC00189B5DC300263241 /* StackOverflowCommunicator.m */; };
+		27DCCC02189B5DC300263241 /* StackOverflowCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DCCC00189B5DC300263241 /* StackOverflowCommunicator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +91,10 @@
 		277E1FFD189A136D0042983A /* StackOverflowManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowManagerDelegate.h; sourceTree = "<group>"; };
 		277E2002189A22960042983A /* MockStackoverflowManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockStackoverflowManagerDelegate.h; sourceTree = "<group>"; };
 		277E2003189A22960042983A /* MockStackoverflowManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockStackoverflowManagerDelegate.m; sourceTree = "<group>"; };
+		27DCCBFC189B596D00263241 /* MockStackoverflowCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockStackoverflowCommunicator.h; sourceTree = "<group>"; };
+		27DCCBFD189B596D00263241 /* MockStackoverflowCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockStackoverflowCommunicator.m; sourceTree = "<group>"; };
+		27DCCBFF189B5DC300263241 /* StackOverflowCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowCommunicator.h; sourceTree = "<group>"; };
+		27DCCC00189B5DC300263241 /* StackOverflowCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackOverflowCommunicator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +167,8 @@
 				270A47281897212000D9CB53 /* Person.m */,
 				270A47211896FE6B00D9CB53 /* Question.h */,
 				270A47221896FE6B00D9CB53 /* Question.m */,
+				27DCCBFF189B5DC300263241 /* StackOverflowCommunicator.h */,
+				27DCCC00189B5DC300263241 /* StackOverflowCommunicator.m */,
 				271DADC21899B002009F0F65 /* StackOverflowManager.h */,
 				271DADC31899B002009F0F65 /* StackOverflowManager.m */,
 				277E1FFD189A136D0042983A /* StackOverflowManagerDelegate.h */,
@@ -208,6 +217,8 @@
 		277E2001189A21EE0042983A /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				27DCCBFC189B596D00263241 /* MockStackoverflowCommunicator.h */,
+				27DCCBFD189B596D00263241 /* MockStackoverflowCommunicator.m */,
 				277E2002189A22960042983A /* MockStackoverflowManagerDelegate.h */,
 				277E2003189A22960042983A /* MockStackoverflowManagerDelegate.m */,
 			);
@@ -314,6 +325,7 @@
 				270A46F218948D0400D9CB53 /* AppDelegate.m in Sources */,
 				270A473318977EAC00D9CB53 /* Topic.m in Sources */,
 				270A46F818948D0400D9CB53 /* MasterViewController.m in Sources */,
+				27DCCC01189B5DC300263241 /* StackOverflowCommunicator.m in Sources */,
 				270A47291897212000D9CB53 /* Person.m in Sources */,
 				270A472F18974A1D00D9CB53 /* Answer.m in Sources */,
 				270A46EE18948D0400D9CB53 /* main.m in Sources */,
@@ -327,9 +339,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27DCCC02189B5DC300263241 /* StackOverflowCommunicator.m in Sources */,
 				270A472C189749F300D9CB53 /* AnswerTests.m in Sources */,
 				270A473418977EAC00D9CB53 /* Topic.m in Sources */,
 				277E2004189A22960042983A /* MockStackoverflowManagerDelegate.m in Sources */,
+				27DCCBFE189B596D00263241 /* MockStackoverflowCommunicator.m in Sources */,
 				270A472A1897212000D9CB53 /* Person.m in Sources */,
 				270A471A18949C7700D9CB53 /* TopicTests.m in Sources */,
 				270A473018974A1D00D9CB53 /* Answer.m in Sources */,

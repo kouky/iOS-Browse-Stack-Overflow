@@ -10,5 +10,5 @@
 #import "StackOverflowManagerDelegate.h"
 
 @interface MockStackoverflowManagerDelegate : NSObject <StackOverflowManagerDelegate>
-
+@property (nonatomic) NSError *fetchError;
 @end
