@@ -15,6 +15,7 @@
 @interface QuestionCreationTests : XCTestCase {
     StackOverflowManager *mgr;
     MockStackoverflowManagerDelegate *delegate;
+    NSError *underlyingError;
 }
 @end
 
@@ -26,6 +27,8 @@
     // Put setup code here; it will be run once, before the first test case.
     mgr = [[StackOverflowManager alloc] init];
     delegate = [[MockStackoverflowManagerDelegate alloc] init];
+    mgr.delegate = delegate;
+    underlyingError = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
 }
 
 - (void)tearDown
@@ -33,6 +36,7 @@
  
     delegate = nil;
     mgr = nil;
+    underlyingError = nil;
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
 }
@@ -63,16 +67,12 @@
 
 - (void)testErrorReturnedToDelegateIsNotErrorNotifiedByComminicator
 {
-    mgr.delegate = delegate;
-    NSError *underlyingError = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
     [mgr searchingForQuestionsFailedWithError:underlyingError];
     XCTAssertFalse(underlyingError == [delegate fetchError], @"Error shoudl be at the correct level of abstraction");
 }
 
 - (void)testErrorReturnedToDelegateDocumentsUnderlingError
 {
-    mgr.delegate = delegate;
-    NSError *underlyingError = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
     [mgr searchingForQuestionsFailedWithError:underlyingError];
     XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], underlyingError, @"The underlying error should be available to client code");
 }
