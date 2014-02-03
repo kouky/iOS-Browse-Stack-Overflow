@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Michael Koukoullis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "StackOverflowCommunicator.h"
 
-@interface MockStackoverflowCommunicator : NSObject
+@interface MockStackoverflowCommunicator : StackOverflowCommunicator
 @property (nonatomic, readonly) BOOL wasAskedToFetchQuestions;
-- (void)searchForQuestionsWithTag:(NSString *)tag;
 @end
