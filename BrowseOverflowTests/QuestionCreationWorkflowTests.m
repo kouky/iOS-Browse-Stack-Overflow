@@ -1,5 +1,5 @@
 //
-//  QuestionCreationTests.m
+//  QuestionCreationWorkflowTests.m
 //  BrowseOverflow
 //
 //  Created by Michael Koukoullis on 30/01/2014.
@@ -14,7 +14,7 @@
 #import "FakeQuestionBuilder.h"
 #import "Question.h"
 
-@interface QuestionCreationTests : XCTestCase {
+@interface QuestionCreationWorkflowTests : XCTestCase {
     StackOverflowManager *mgr;
     MockStackoverflowManagerDelegate *delegate;
     FakeQuestionBuilder *questionBuilder;
@@ -23,7 +23,7 @@
 }
 @end
 
-@implementation QuestionCreationTests
+@implementation QuestionCreationWorkflowTests
 
 - (void)setUp
 {
