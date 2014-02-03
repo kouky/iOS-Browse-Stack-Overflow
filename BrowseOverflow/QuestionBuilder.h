@@ -11,3 +11,11 @@
 @interface QuestionBuilder : NSObject
 - (NSArray *)questionsFromJSON:(NSString *)objectNotation error:(NSError **)error;
 @end
+
+extern NSString *QuestionBuilderErrorDomain;
+
+enum {
+    QuestionBuilderInvalidJSONError,
+    QuestionBuilderMissingDataError
+};
+

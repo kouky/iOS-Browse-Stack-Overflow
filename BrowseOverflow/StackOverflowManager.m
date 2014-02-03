@@ -41,6 +41,8 @@
     }
 }
 
+// Private
+
 - (void)tellDelegateAboutQuestionSearchError:(NSError *)error
 {
     NSDictionary *errorInfo = nil;
