@@ -11,10 +11,12 @@
 #import "MockStackOverflowManagerDelegate.h"
 #import "Topic.h"
 #import "MockStackoverflowCommunicator.h"
+#import "FakeQuestionBuilder.h"
 
 @interface QuestionCreationTests : XCTestCase {
     StackOverflowManager *mgr;
     MockStackoverflowManagerDelegate *delegate;
+    FakeQuestionBuilder *questionBuilder;
     NSError *underlyingError;
 }
 @end
@@ -27,8 +29,11 @@
     // Put setup code here; it will be run once, before the first test case.
     mgr = [[StackOverflowManager alloc] init];
     delegate = [[MockStackoverflowManagerDelegate alloc] init];
-    mgr.delegate = delegate;
+    questionBuilder = [[FakeQuestionBuilder alloc] init];
     underlyingError = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
+    
+    mgr.delegate = delegate;
+    mgr.questionBuilder = questionBuilder;
 }
 
 - (void)tearDown
@@ -36,6 +41,7 @@
  
     delegate = nil;
     mgr = nil;
+    questionBuilder = nil;
     underlyingError = nil;
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
@@ -75,6 +81,20 @@
 {
     [mgr searchingForQuestionsFailedWithError:underlyingError];
     XCTAssertEqualObjects([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], underlyingError, @"The underlying error should be available to client code");
+}
+
+- (void)testQuestionJSONIsPassedToQuestionBuilder
+{
+    [mgr receivedQuestionsJSON: @"Fake JSON"];
+    XCTAssertEqualObjects(questionBuilder.JSON, @"Fake JSON", @"Downloaded JSON is sent to the builder");
+}
+
+- (void)testDelegateNotifiedOfErrorWhenQuestionBuilderFails
+{
+    questionBuilder.arrayToReturn = nil;
+    questionBuilder.errorToSet = underlyingError;
+    [mgr receivedQuestionsJSON:@"Fake JSON"];
+    XCTAssertNotNil([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], @"The delegate should have found out about the error");
 }
 
 @end

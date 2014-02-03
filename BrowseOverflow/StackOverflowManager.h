@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "StackOverflowManagerDelegate.h"
+#import "QuestionBuilder.h"
 
 @class StackOverflowCommunicator;
 @class Topic;
@@ -16,9 +17,11 @@
 
 @property (nonatomic, weak) id <StackOverflowManagerDelegate> delegate;
 @property (nonatomic, strong) StackOverflowCommunicator *communicator;
+@property (nonatomic, strong) QuestionBuilder *questionBuilder;
 
 - (void)fetchQuestionsOnTopic:(Topic *)topic;
 - (void)searchingForQuestionsFailedWithError:(NSError *)error;
+- (void)receivedQuestionsJSON:(NSString *)objectNotation;
 
 @end
 
