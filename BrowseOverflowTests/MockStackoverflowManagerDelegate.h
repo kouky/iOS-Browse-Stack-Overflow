@@ -11,4 +11,5 @@
 
 @interface MockStackoverflowManagerDelegate : NSObject <StackOverflowManagerDelegate>
 @property (nonatomic) NSError *fetchError;
+@property (nonatomic) NSArray *receivedQuestions;
 @end

@@ -36,6 +36,8 @@
     NSArray *questions = [self.questionBuilder questionsFromJSON:objectNotation error:&error];
     if (!questions) {
         [self tellDelegateAboutQuestionSearchError:error];
+    } else {
+        [self.delegate didReceiveQuestions:questions];
     }
 }
 
