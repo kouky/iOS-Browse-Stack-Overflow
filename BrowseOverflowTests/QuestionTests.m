@@ -9,11 +9,13 @@
 #import <XCTest/XCTest.h>
 #import "Question.h"
 #import "Answer.h"
+#import "Person.h"
 
 @interface QuestionTests : XCTestCase {
     Question *question;
     Answer *lowScore;
     Answer *highScore;
+    Person *asker;
 }
 @end
 
@@ -27,6 +29,7 @@
     question.date = [NSDate distantPast];
     question.title = @"Do iPhones also dream of electric sheep?";
     question.score = 42;
+    question.questionID = 17;
     
     Answer *accepted = [[Answer alloc] init];
     accepted.score = 1;
@@ -40,6 +43,9 @@
     highScore = [[Answer alloc] init];
     highScore.score = 4;
     [question addAnswer:highScore];
+    
+    asker = [[Person alloc] initWithName: @"Graham Lee" avatarLocation:@"http://example.com/avatar.png"];
+    question.asker = asker;
 }
 
 - (void)tearDown
@@ -68,6 +74,10 @@
     XCTAssertEqualObjects(question.title, @"Do iPhones also dream of electric sheep?", @"Question should know its title");
 }
 
+- (void)testQuestionHasIdentity {
+    XCTAssertEqual(question.questionID, 17, @"Questions need a numeric identifier");
+}
+
 - (void)testQuestionCanHaveAnswersAdded
 {
     Answer *myAnswer = [[Answer alloc] init];
@@ -84,6 +94,11 @@
     NSInteger highIndex = [question.answers indexOfObject:highScore];
     NSInteger lowIndex = [question.answers indexOfObject:lowScore];
     XCTAssertTrue(highIndex < lowIndex, @"High-scoring answer comes first");
+}
+
+- (void)testQuestionWasAskedBySomeone
+{
+    XCTAssertEqualObjects(question.asker, asker, @"Question shoudl keep track of who asked it");
 }
 
 @end

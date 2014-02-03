@@ -7,13 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @class Answer;
+@class Person;
 
 @interface Question : NSObject
 @property (nonatomic) NSDate *date;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic) NSInteger score;
 @property (nonatomic, readonly) NSArray *answers;
+@property (nonatomic) Person *asker;
+@property (nonatomic) NSInteger questionID;
 
 - (void)addAnswer:(Answer *)answer;
 @end
