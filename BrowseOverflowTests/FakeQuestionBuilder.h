@@ -12,4 +12,5 @@
 @property (nonatomic, copy) NSString *JSON;
 @property (nonatomic, copy) NSArray *arrayToReturn;
 @property (nonatomic, copy) NSError *errorToSet;
+@property (nonatomic) Question *questionToFill;
 @end

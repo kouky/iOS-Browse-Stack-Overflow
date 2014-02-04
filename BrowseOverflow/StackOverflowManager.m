@@ -9,6 +9,11 @@
 #import "StackOverflowManager.h"
 #import "StackOverflowCommunicator.h"
 #import "Topic.h"
+#import "Question.h"
+
+@interface StackOverflowManager ()
+@property (nonatomic) Question *questionNeedingBody;
+@end
 
 @implementation StackOverflowManager
 
@@ -25,6 +30,12 @@
     [self.communicator searchForQuestionsWithTag:[topic tag]];
 }
 
+- (void)fetchBodyForQuestion:(Question *)question
+{
+    self.questionNeedingBody = question;
+    [self.communicator downloadInformationForQuestionWithID:question.questionID];
+}
+
 - (void)searchingForQuestionsFailedWithError:(NSError *)error
 {
     [self tellDelegateAboutQuestionSearchError:error];
@@ -39,6 +50,16 @@
     } else {
         [self.delegate didReceiveQuestions:questions];
     }
+}
+
+- (void)fetchingQuestionBodyFailedWithError:(NSError *)error
+{
+    [self tellDelegateAboutQuestionSearchError:error];
+}
+
+- (void)receivedQuestionBodyJSON:(NSString *)objectNotation
+{
+    [self.questionBuilder fillInDetailsForQuestion:self.questionNeedingBody fromJSON:objectNotation];
 }
 
 // Private

@@ -12,6 +12,7 @@
 
 @class StackOverflowCommunicator;
 @class Topic;
+@class Question;
 
 @interface StackOverflowManager : NSObject
 
@@ -22,6 +23,9 @@
 - (void)fetchQuestionsOnTopic:(Topic *)topic;
 - (void)searchingForQuestionsFailedWithError:(NSError *)error;
 - (void)receivedQuestionsJSON:(NSString *)objectNotation;
+- (void)fetchBodyForQuestion:(Question *)question;
+- (void)fetchingQuestionBodyFailedWithError:(NSError *)error;
+- (void)receivedQuestionBodyJSON:(NSString *)objectNotation;
 
 @end
 

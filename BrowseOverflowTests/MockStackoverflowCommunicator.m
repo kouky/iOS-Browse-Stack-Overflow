@@ -10,6 +10,7 @@
 
 @interface MockStackoverflowCommunicator ()
 @property (nonatomic, readwrite) BOOL wasAskedToFetchQuestions;
+@property (nonatomic, readwrite) BOOL wasAskedToFetchBody;
 @end
 
 @implementation MockStackoverflowCommunicator
@@ -17,6 +18,11 @@
 - (void)searchForQuestionsWithTag:(NSString *)tag
 {
     self.wasAskedToFetchQuestions = YES;
+}
+
+- (void)downloadInformationForQuestionWithID:(NSInteger)questionID
+{
+    self.wasAskedToFetchBody = YES;
 }
 
 @end

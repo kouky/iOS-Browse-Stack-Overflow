@@ -19,4 +19,10 @@
     return self.arrayToReturn;
 }
 
+- (void)fillInDetailsForQuestion:(Question *)question fromJSON:(NSString *)objectNotation
+{
+    self.JSON = objectNotation;
+    self.questionToFill = question;
+}
+
 @end

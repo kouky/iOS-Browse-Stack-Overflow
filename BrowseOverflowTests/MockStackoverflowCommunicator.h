@@ -10,4 +10,5 @@
 
 @interface MockStackoverflowCommunicator : StackOverflowCommunicator
 @property (nonatomic, readonly) BOOL wasAskedToFetchQuestions;
+@property (nonatomic, readonly) BOOL wasAskedToFetchBody;
 @end

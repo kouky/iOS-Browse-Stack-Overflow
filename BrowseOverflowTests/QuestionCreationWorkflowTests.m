@@ -18,6 +18,8 @@
     StackOverflowManager *mgr;
     MockStackoverflowManagerDelegate *delegate;
     FakeQuestionBuilder *questionBuilder;
+    Question *questionToFetch;
+    MockStackoverflowCommunicator *communicator;
     NSArray *questionArray;
     NSError *underlyingError;
 }
@@ -31,21 +33,26 @@
     // Put setup code here; it will be run once, before the first test case.
     mgr = [[StackOverflowManager alloc] init];
     delegate = [[MockStackoverflowManagerDelegate alloc] init];
+    communicator = [[MockStackoverflowCommunicator alloc] init];
     questionBuilder = [[FakeQuestionBuilder alloc] init];
-    Question *question = [[Question alloc] init];
-    questionArray = @[question];
+    questionToFetch = [[Question alloc] init];
+    questionToFetch.questionID = 1234;
+    questionArray = @[questionToFetch];
     underlyingError = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
     
     mgr.delegate = delegate;
     mgr.questionBuilder = questionBuilder;
+    mgr.communicator = communicator;
 }
 
 - (void)tearDown
 {
  
     delegate = nil;
-    mgr = nil;
+    communicator = nil;
     questionBuilder = nil;
+    mgr = nil;
+    questionToFetch = nil;
     questionArray = nil;
     underlyingError = nil;
     // Put teardown code here; it will be run once, after the last test case.
@@ -69,8 +76,6 @@
 
 - (void)testAskingForQuestionsMeansRequestingData
 {
-    MockStackoverflowCommunicator *communicator = [[MockStackoverflowCommunicator alloc] init];
-    mgr.communicator = communicator;
     Topic *topic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
     [mgr fetchQuestionsOnTopic:topic];
     XCTAssertTrue([communicator wasAskedToFetchQuestions], @"The communicator should need to fetch data");
@@ -121,6 +126,31 @@
     questionBuilder.arrayToReturn = @[];
     [mgr receivedQuestionsJSON:@"Fake JSON"];
     XCTAssertEqualObjects([delegate receivedQuestions], @[], @"Returning an empty array is not an error");
+}
+
+- (void)testAskingForQuestionBodyMeansRequestingData
+{
+    [mgr fetchBodyForQuestion:questionToFetch];
+    XCTAssertTrue([communicator wasAskedToFetchBody], @"The communicator should need to request data for the question body");
+}
+
+- (void)testDelegateNotifiedOfFailureToFetchQUestion
+{
+    [mgr fetchingQuestionBodyFailedWithError:underlyingError];
+    XCTAssertNotNil([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], @"Delegate should have found out about this error");
+}
+
+- (void)testManagerPassesRetreivedQuestionBodyToQuestionBuilder
+{
+    [mgr receivedQuestionBodyJSON:@"Fake JSON"];
+    XCTAssertEqualObjects(questionBuilder.JSON, @"Fake JSON", @"Successfully retreived data should be passed to the builder");
+}
+
+- (void)testManagerPassesQuestionItWasSentToQuestionBuilderForFillingIn
+{
+    [mgr fetchBodyForQuestion:questionToFetch];
+    [mgr receivedQuestionBodyJSON:@"Fake JSON"];
+    XCTAssertEqualObjects(questionBuilder.questionToFill, questionToFetch, @"The question should have been passed to the builderi");
 }
 
 @end
