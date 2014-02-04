@@ -11,6 +11,7 @@
 #import "UserBuilder.h"
 
 @implementation QuestionBuilder
+
 - (NSArray *)questionsFromJSON:(NSString *)objectNotation error:(NSError **)error
 {
     NSParameterAssert(objectNotation != nil);
@@ -46,10 +47,9 @@
         [results addObject: thisQuestion];
     }
     
-    
     return [results copy];
-    
 }
+
 @end
 
 NSString *QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomain";
