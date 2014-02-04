@@ -52,6 +52,8 @@ static NSString *questionJSON = @"{"
 @interface QuestionBuilderTests : XCTestCase{
     QuestionBuilder *questionBuilder;
     Question *question;
+    NSString *stringIsNotJSON;
+    NSString *noQuestionsJSONString;
 }
 
 @end
@@ -64,12 +66,15 @@ static NSString *questionJSON = @"{"
     // Put setup code here; it will be run once, before the first test case.
     questionBuilder  = [[QuestionBuilder alloc] init];
     question = [[questionBuilder questionsFromJSON:questionJSON error:NULL] objectAtIndex:0];
+    stringIsNotJSON = @"Not JSON";
+    noQuestionsJSONString = @"{ \"noquestions\": true }";
 }
 
 - (void)tearDown
 {
     questionBuilder = nil;
     question = nil;
+    stringIsNotJSON = nil;
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
 }
@@ -81,32 +86,30 @@ static NSString *questionJSON = @"{"
 
 - (void)testNilReturnedWhenStringIsNotJSON
 {
-    XCTAssertNil([questionBuilder questionsFromJSON:@"Not JSON" error:NULL], @"This paramater should not be parsable");
+    XCTAssertNil([questionBuilder questionsFromJSON:stringIsNotJSON error:NULL], @"This paramater should not be parsable");
 }
 
 - (void)testErrorSetWhenStringIsNotJSON
 {
     NSError *error = nil;
-    [questionBuilder questionsFromJSON:@"Not JSON" error:&error];
+    [questionBuilder questionsFromJSON:stringIsNotJSON error:&error];
     XCTAssertNotNil(error, @"An error occured we should be told");
 }
 
 - (void)testPassingNULLErrorDoesNotCauseCrash
 {
-    XCTAssertNoThrow([questionBuilder questionsFromJSON:@"Not JSON" error:NULL], @"Using a NULL error parameter should not be a problem");
+    XCTAssertNoThrow([questionBuilder questionsFromJSON:stringIsNotJSON error:NULL], @"Using a NULL error parameter should not be a problem");
 }
 
 - (void)testRealJSONWithoutQuestionsArrayIsError
 {
-    NSString *jsonString = @"{ \"noquestions\": true }";
-    XCTAssertNil([questionBuilder questionsFromJSON:jsonString error:NULL], @"No questions to parse in this JSON");
+    XCTAssertNil([questionBuilder questionsFromJSON:noQuestionsJSONString error:NULL], @"No questions to parse in this JSON");
 }
 
 - (void)testRealJSONWithoutQuestionsReturnsMissingDataError
 {
-    NSString *jsonString = @"{ \"noquestions\": true }";
     NSError *error = nil;
-    [questionBuilder questionsFromJSON:jsonString error:&error];
+    [questionBuilder questionsFromJSON:noQuestionsJSONString error:&error];
     XCTAssertEqual([error code], QuestionBuilderMissingDataError, @"This case should not be an invalid JSON error");
 }
 
@@ -125,6 +128,34 @@ static NSString *questionJSON = @"{"
     Person *asker = question.asker;
     XCTAssertEqualObjects(asker.name, @"Graham Lee", @"Looks like I should have asked this question");
     XCTAssertEqualObjects([asker.avatarURL absoluteString], @"http://www.gravatar.com/avatar/563290c0c1b776a315b36e863b388a0c", @"The avatar URL should be based on the supplied email hash");
+}
+
+- (void)testBuildingQuestionBodyWithNoDataCannotBeTried
+{
+    XCTAssertThrows([questionBuilder fillInDetailsForQuestion:question fromJSON:nil], @"Not receiving data should have been handled earlier");
+}
+
+- (void)testBuildingQuestionBodyWithNoQuestionCannotBeTried
+{
+    XCTAssertThrows([questionBuilder fillInDetailsForQuestion:nil fromJSON:questionJSON], @"No reason to expect that a nil question is passed");
+}
+
+- (void)testNonJSONDataDoesNotCauseABodyToBeAddedToAQuestion
+{
+    [questionBuilder fillInDetailsForQuestion:question fromJSON:stringIsNotJSON];
+    XCTAssertNil(question.body, @"Body should not have been added");
+}
+
+- (void)testJSONWhichDoesNotContainABodyDoesNotCauseBodyToBeAdded
+{
+    [questionBuilder fillInDetailsForQuestion:question fromJSON:noQuestionsJSONString];
+    XCTAssertNil(question.body, @"Body should not have benn added");
+}
+
+- (void)testBodyContainedInJSONIsAddedToQuestion
+{
+    [questionBuilder fillInDetailsForQuestion:question fromJSON:questionJSON];
+    XCTAssertEqualObjects(question.body, @"<p>I've been trying to use persistent keychain references.</p>", @"The correct question body is added");
 }
 
 @end

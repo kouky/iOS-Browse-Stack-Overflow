@@ -50,6 +50,23 @@
     return [results copy];
 }
 
+- (void)fillInDetailsForQuestion:(Question *)question fromJSON:(NSString *)objectNotation
+{
+    NSParameterAssert(objectNotation != nil);
+    NSParameterAssert(question != nil);
+
+    NSData *unicodeNotation = [objectNotation dataUsingEncoding: NSUTF8StringEncoding];
+    NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData: unicodeNotation options: 0 error: NULL];
+    if (![parsedObject isKindOfClass: [NSDictionary class]]) {
+        return;
+    }
+    
+    NSString *questionBody = [[parsedObject[@"questions"] lastObject] objectForKey: @"body"];
+    if (questionBody) {
+        question.body = questionBody;
+    }
+}
+
 @end
 
 NSString *QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomain";

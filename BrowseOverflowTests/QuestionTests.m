@@ -28,6 +28,7 @@
     question = [[Question alloc] init];
     question.date = [NSDate distantPast];
     question.title = @"Do iPhones also dream of electric sheep?";
+    question.body = @"I'm just wondering whether they do the same things that Androids do.";
     question.score = 42;
     question.questionID = 17;
     
@@ -72,6 +73,11 @@
 - (void)testQuestionHasTitle
 {
     XCTAssertEqualObjects(question.title, @"Do iPhones also dream of electric sheep?", @"Question should know its title");
+}
+
+- (void)testQuestionHasBody
+{
+    XCTAssertEqualObjects(question.body, @"I'm just wondering whether they do the same things that Androids do.", @"Question should have body content");
 }
 
 - (void)testQuestionHasIdentity {
