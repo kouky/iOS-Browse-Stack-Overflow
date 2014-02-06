@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class Topic;
+//@class Topic;
 
 @protocol StackOverflowManagerDelegate <NSObject>
 - (void)fetchQuestionsFailedWithError:(NSError *)error;

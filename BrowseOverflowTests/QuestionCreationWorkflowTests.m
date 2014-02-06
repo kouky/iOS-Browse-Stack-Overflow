@@ -134,7 +134,7 @@
     XCTAssertTrue([communicator wasAskedToFetchBody], @"The communicator should need to request data for the question body");
 }
 
-- (void)testDelegateNotifiedOfFailureToFetchQUestion
+- (void)testDelegateNotifiedOfFailureToFetchQuestion
 {
     [mgr fetchingQuestionBodyFailedWithError:underlyingError];
     XCTAssertNotNil([[[delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], @"Delegate should have found out about this error");
