@@ -55,6 +55,7 @@
 		27ECD46418A5B1660078B9A7 /* BrowseOverflowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD46118A5B1660078B9A7 /* BrowseOverflowViewController.m */; };
 		27ECD46518A5B1660078B9A7 /* BrowseOverflowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27ECD46218A5B1660078B9A7 /* BrowseOverflowViewController.xib */; };
 		27ECD46618A5B1660078B9A7 /* BrowseOverflowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27ECD46218A5B1660078B9A7 /* BrowseOverflowViewController.xib */; };
+		27ECD46818A5B5F10078B9A7 /* BrowseOverflowViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD46718A5B5F10078B9A7 /* BrowseOverflowViewControllerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		27ECD46018A5B1660078B9A7 /* BrowseOverflowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseOverflowViewController.h; sourceTree = "<group>"; };
 		27ECD46118A5B1660078B9A7 /* BrowseOverflowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseOverflowViewController.m; sourceTree = "<group>"; };
 		27ECD46218A5B1660078B9A7 /* BrowseOverflowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowseOverflowViewController.xib; sourceTree = "<group>"; };
+		27ECD46718A5B5F10078B9A7 /* BrowseOverflowViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseOverflowViewControllerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				270A472B189749F300D9CB53 /* AnswerTests.m */,
+				27ECD46718A5B5F10078B9A7 /* BrowseOverflowViewControllerTests.m */,
 				270A47251897208B00D9CB53 /* PersonTests.m */,
 				27B7CB13189F3F3600A3824E /* QuestionBuilderTests.m */,
 				270A471F1896FDF400D9CB53 /* QuestionTests.m */,
@@ -421,6 +424,7 @@
 				271DADC51899B002009F0F65 /* StackOverflowManager.m in Sources */,
 				271DADC01899AB51009F0F65 /* QuestionCreationWorkflowTests.m in Sources */,
 				270A47201896FDF400D9CB53 /* QuestionTests.m in Sources */,
+				27ECD46818A5B5F10078B9A7 /* BrowseOverflowViewControllerTests.m in Sources */,
 				270A47261897208B00D9CB53 /* PersonTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
