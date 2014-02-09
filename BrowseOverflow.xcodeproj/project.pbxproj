@@ -59,6 +59,7 @@
 		27ECD46B18A5D9D30078B9A7 /* TopicTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD46A18A5D9D30078B9A7 /* TopicTableDataSource.m */; };
 		27ECD46E18A5DA050078B9A7 /* EmptyTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD46D18A5DA050078B9A7 /* EmptyTableViewDelegate.m */; };
 		27F2A07018A83B4E0032A1BC /* TopicTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD46A18A5D9D30078B9A7 /* TopicTableDataSource.m */; };
+		27F2A07218A83C150032A1BC /* TopicTableDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2A07118A83C150032A1BC /* TopicTableDataSourceTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		27ECD46A18A5D9D30078B9A7 /* TopicTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TopicTableDataSource.m; path = BrowseOverflowTests/TopicTableDataSource.m; sourceTree = SOURCE_ROOT; };
 		27ECD46C18A5DA050078B9A7 /* EmptyTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyTableViewDelegate.h; sourceTree = "<group>"; };
 		27ECD46D18A5DA050078B9A7 /* EmptyTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyTableViewDelegate.m; sourceTree = "<group>"; };
+		27F2A07118A83C150032A1BC /* TopicTableDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicTableDataSourceTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 				270A471F1896FDF400D9CB53 /* QuestionTests.m */,
 				271DADBF1899AB51009F0F65 /* QuestionCreationWorkflowTests.m */,
 				27E3807218A22CA7006EE6C9 /* StackOverflowCommunicatorTests.m */,
+				27F2A07118A83C150032A1BC /* TopicTableDataSourceTests.m */,
 				270A471918949C7700D9CB53 /* TopicTests.m */,
 				277E2001189A21EE0042983A /* Mocks */,
 				270A470A18948D0400D9CB53 /* Supporting Files */,
@@ -274,6 +277,8 @@
 		277E2001189A21EE0042983A /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				27ECD46C18A5DA050078B9A7 /* EmptyTableViewDelegate.h */,
+				27ECD46D18A5DA050078B9A7 /* EmptyTableViewDelegate.m */,
 				27B7CB0D189F0BFD00A3824E /* FakeQuestionBuilder.h */,
 				27B7CB0E189F0BFD00A3824E /* FakeQuestionBuilder.m */,
 				27E3807D18A24D04006EE6C9 /* FakeURLResponse.h */,
@@ -288,8 +293,6 @@
 				277E2003189A22960042983A /* MockStackoverflowManagerDelegate.m */,
 				27E3807718A24324006EE6C9 /* NonNetworkedStackOverflowCommunicator.h */,
 				27E3807818A24324006EE6C9 /* NonNetworkedStackOverflowCommunicator.m */,
-				27ECD46C18A5DA050078B9A7 /* EmptyTableViewDelegate.h */,
-				27ECD46D18A5DA050078B9A7 /* EmptyTableViewDelegate.m */,
 			);
 			name = Mocks;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				271DADC01899AB51009F0F65 /* QuestionCreationWorkflowTests.m in Sources */,
 				270A47201896FDF400D9CB53 /* QuestionTests.m in Sources */,
 				27ECD46818A5B5F10078B9A7 /* BrowseOverflowViewControllerTests.m in Sources */,
+				27F2A07218A83C150032A1BC /* TopicTableDataSourceTests.m in Sources */,
 				270A47261897208B00D9CB53 /* PersonTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

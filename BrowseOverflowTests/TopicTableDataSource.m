@@ -8,6 +8,11 @@
 
 #import "TopicTableDataSource.h"
 
+@interface TopicTableDataSource () {
+  NSArray *_topics;
+}
+@end
+
 @implementation TopicTableDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -17,7 +22,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 0;
+  NSParameterAssert(section == 0);
+  return [_topics count];
+}
+
+- (void)setTopics:(NSArray *)newTopics
+{
+  _topics = newTopics;
 }
 
 @end

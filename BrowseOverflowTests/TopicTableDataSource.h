@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface TopicTableDataSource : NSObject <UITableViewDataSource>
-
+- (void)setTopics:(NSArray *)newTopics;
 @end
