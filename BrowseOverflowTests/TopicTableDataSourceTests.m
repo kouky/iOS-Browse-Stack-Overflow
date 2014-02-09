@@ -56,4 +56,21 @@
   XCTAssertThrows([dataSource tableView:nil numberOfRowsInSection:1], @"Data source doesn;t allow asking about additonal sections");
 }
 
+- (void)testDataSourceCellCreationExpectsOneSection {
+  NSIndexPath *secondSection = [NSIndexPath indexPathForRow: 0 inSection: 1];
+  XCTAssertThrows([dataSource tableView: nil cellForRowAtIndexPath: secondSection], @"Data source will not prepare cells for unexpected sections");
+}
+
+- (void)testDataSourceCellCreationWillNotCreateMoreRowsThanItHasTopics {
+  NSIndexPath *afterLastTopic = [NSIndexPath indexPathForRow: [topicsList count] inSection: 0];
+  XCTAssertThrows([dataSource tableView: nil cellForRowAtIndexPath: afterLastTopic], @"Data source will not prepare more cells than there are topics");
+}
+
+- (void)testCellCreatedByDataSourceContainsTopicTitleAsTextLabel {
+  NSIndexPath *firstTopic = [NSIndexPath indexPathForRow: 0 inSection: 0];
+  UITableViewCell *firstCell = [dataSource tableView: nil cellForRowAtIndexPath: firstTopic];
+  NSString *cellTitle = firstCell.textLabel.text;
+  XCTAssertEqualObjects(@"iPhone", cellTitle, @"Cell's title should be equal to the topic's title");
+}
+
 @end

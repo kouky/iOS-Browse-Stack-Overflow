@@ -8,6 +8,8 @@
 
 #import "TopicTableDataSource.h"
 
+NSString *topicCellReuseIdentifier = @"Topic";
+
 @interface TopicTableDataSource () {
   NSArray *_topics;
 }
@@ -17,7 +19,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return nil;
+  NSParameterAssert([indexPath section] == 0);
+  NSParameterAssert([indexPath row] < [_topics count]);
+  UITableViewCell *topicCell = [tableView dequeueReusableCellWithIdentifier:topicCellReuseIdentifier];
+  if (!topicCell) {
+    topicCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:topicCellReuseIdentifier];
+  }
+  topicCell.textLabel.text = [[_topics objectAtIndex:[indexPath row]] name];
+  return topicCell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
