@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Michael Koukoullis. All rights reserved.
 //
 
-#import "EmptyTableViewDataSource.h"
+#import "TopicTableDataSource.h"
 
-@implementation EmptyTableViewDataSource
+@implementation TopicTableDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

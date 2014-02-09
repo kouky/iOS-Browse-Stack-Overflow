@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "BrowseOverflowViewController.h"
-#import "EmptyTableViewDataSource.h"
+#import "TopicTableDataSource.h"
 #import "EmptyTableViewDelegate.h"
 #import <objc/runtime.h>
 
@@ -56,15 +56,15 @@
   XCTAssertTrue(delegateProperty != NULL, @"View Controller needs a table view delegate");
 }
 
-- (void)testViewControlerConnectsDataSourceInViewDiDLoad
+- (void)testViewControlerConnectsDataSourceInViewDidLoad
 {
-  id <UITableViewDataSource> dataSource = [[EmptyTableViewDataSource alloc] init];
+  id <UITableViewDataSource> dataSource = [[TopicTableDataSource alloc] init];
   viewController.dataSource = dataSource;
   [viewController viewDidLoad];
   XCTAssertEqualObjects([tableView dataSource], dataSource, @"View controller should have set the table view's data source");
 }
 
-- (void)testViewControlerConnectsDelegateInViewDiDLoad
+- (void)testViewControlerConnectsDelegateInViewDidLoad
 {
   id <UITableViewDelegate> delegate = [[EmptyTableViewDelegate alloc] init];
   viewController.tableViewDelegate = delegate;

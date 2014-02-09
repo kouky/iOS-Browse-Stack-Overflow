@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface EmptyTableViewDataSource : NSObject <UITableViewDataSource>
+@interface TopicTableDataSource : NSObject <UITableViewDataSource>
 
 @end
