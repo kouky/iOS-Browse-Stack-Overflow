@@ -14,3 +14,5 @@
 @property (nonatomic, strong) TopicTableDataSource *tableDataSource;
 
 @end
+
+extern NSString *TopicTableDidSelectTopicNotification;

@@ -34,6 +34,7 @@
 		270A473318977EAC00D9CB53 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A473218977EAC00D9CB53 /* Topic.m */; };
 		270A473418977EAC00D9CB53 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A473218977EAC00D9CB53 /* Topic.m */; };
 		270D2BBA18A85A2100435523 /* TopicTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27ECD46D18A5DA050078B9A7 /* TopicTableDelegate.m */; };
+		270D2BBC18A872DD00435523 /* TopicTableDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 270D2BBB18A872DD00435523 /* TopicTableDelegateTests.m */; };
 		271DADC01899AB51009F0F65 /* QuestionCreationWorkflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADBF1899AB51009F0F65 /* QuestionCreationWorkflowTests.m */; };
 		271DADC41899B002009F0F65 /* StackOverflowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADC31899B002009F0F65 /* StackOverflowManager.m */; };
 		271DADC51899B002009F0F65 /* StackOverflowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADC31899B002009F0F65 /* StackOverflowManager.m */; };
@@ -106,6 +107,7 @@
 		270A472E18974A1D00D9CB53 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
 		270A473118977EAC00D9CB53 /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
 		270A473218977EAC00D9CB53 /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
+		270D2BBB18A872DD00435523 /* TopicTableDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicTableDelegateTests.m; sourceTree = "<group>"; };
 		271DADBF1899AB51009F0F65 /* QuestionCreationWorkflowTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCreationWorkflowTests.m; sourceTree = "<group>"; };
 		271DADC21899B002009F0F65 /* StackOverflowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowManager.h; sourceTree = "<group>"; };
 		271DADC31899B002009F0F65 /* StackOverflowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackOverflowManager.m; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				271DADBF1899AB51009F0F65 /* QuestionCreationWorkflowTests.m */,
 				27E3807218A22CA7006EE6C9 /* StackOverflowCommunicatorTests.m */,
 				27F2A07118A83C150032A1BC /* TopicTableDataSourceTests.m */,
+				270D2BBB18A872DD00435523 /* TopicTableDelegateTests.m */,
 				270A471918949C7700D9CB53 /* TopicTests.m */,
 				277E2001189A21EE0042983A /* Mocks */,
 				270A470A18948D0400D9CB53 /* Supporting Files */,
@@ -424,6 +427,7 @@
 				270A472C189749F300D9CB53 /* AnswerTests.m in Sources */,
 				27B7CB14189F3F3600A3824E /* QuestionBuilderTests.m in Sources */,
 				27ECD46418A5B1660078B9A7 /* BrowseOverflowViewController.m in Sources */,
+				270D2BBC18A872DD00435523 /* TopicTableDelegateTests.m in Sources */,
 				27E3807C18A245AB006EE6C9 /* MockStackOverflowManager.m in Sources */,
 				27B7CB18189F628300A3824E /* UserBuilder.m in Sources */,
 				270A473418977EAC00D9CB53 /* Topic.m in Sources */,

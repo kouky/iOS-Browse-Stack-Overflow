@@ -10,4 +10,13 @@
 
 @implementation TopicTableDelegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSNotification *note = [NSNotification notificationWithName:TopicTableDidSelectTopicNotification
+                                                       object:[self.tableDataSource topicForIndexPath:indexPath]];
+  [[NSNotificationCenter defaultCenter] postNotification:note];
+}
+
 @end
+
+NSString *TopicTableDidSelectTopicNotification = @"TopicTableDidSelectTopicNotification";
