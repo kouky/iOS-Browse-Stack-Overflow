@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TopicTableDataSource.h"
 
-@interface EmptyTableViewDelegate : NSObject <UITableViewDelegate>
+@interface TopicTableDelegate : NSObject <UITableViewDelegate>
+
+@property (nonatomic, strong) TopicTableDataSource *tableDataSource;
 
 @end
