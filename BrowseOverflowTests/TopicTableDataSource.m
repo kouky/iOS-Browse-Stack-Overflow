@@ -18,6 +18,8 @@ NSString *topicCellReuseIdentifier = @"Topic";
 
 @implementation TopicTableDataSource
 
+#pragma mark UITableViewDataSource Delegate Methods
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSParameterAssert([indexPath section] == 0);
@@ -36,10 +38,23 @@ NSString *topicCellReuseIdentifier = @"Topic";
   return [_topics count];
 }
 
+#pragma mark UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSNotification *note = [NSNotification notificationWithName:TopicTableDidSelectTopicNotification
+                                                       object:[self topicForIndexPath:indexPath]];
+  [[NSNotificationCenter defaultCenter] postNotification:note];
+}
+
+#pragma mark Public Methods
+
 - (void)setTopics:(NSArray *)newTopics
 {
   _topics = newTopics;
 }
+
+#pragma mark Private Methods
 
 - (Topic *)topicForIndexPath:(NSIndexPath *)indexPath
 {
@@ -47,3 +62,5 @@ NSString *topicCellReuseIdentifier = @"Topic";
 }
 
 @end
+
+NSString *TopicTableDidSelectTopicNotification = @"TopicTableDidSelectTopicNotification";

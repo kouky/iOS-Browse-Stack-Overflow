@@ -7,14 +7,12 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "TopicTableDelegate.h"
 #import "TopicTableDataSource.h"
 #import "Topic.h"
 
 @interface TopicTableDelegateTests : XCTestCase {
   NSNotification *receivedNotification;
   TopicTableDataSource *dataSource;
-  TopicTableDelegate *delegate;
   Topic *iPhoneTopic;
 }
 
@@ -26,12 +24,10 @@
 {
   [super setUp];
   // Put setup code here; it will be run once, before the first test case.
-  delegate = [[TopicTableDelegate alloc] init];
   dataSource = [[TopicTableDataSource alloc] init];
   iPhoneTopic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
   
   [dataSource setTopics:@[iPhoneTopic]];
-  delegate.tableDataSource = dataSource;
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(didReceiveNotification:)
                                                name:TopicTableDidSelectTopicNotification object:nil];
@@ -41,7 +37,6 @@
 {
   receivedNotification = nil;
   dataSource = nil;
-  delegate = nil;
   iPhoneTopic = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   // Put teardown code here; it will be run once, after the last test case.
@@ -56,7 +51,7 @@
 - (void)testDelegatePostsNotificationOnSelectionShowingWhichTopicWasSelected
 {
   NSIndexPath *selection = [NSIndexPath indexPathForItem:0 inSection:0];
-  [delegate tableView:nil didSelectRowAtIndexPath:selection];
+  [dataSource tableView:nil didSelectRowAtIndexPath:selection];
   XCTAssertEqualObjects([receivedNotification name], @"TopicTableDidSelectTopicNotification", @"The delegate should notify that a topic was selected");
   XCTAssertEqualObjects([receivedNotification object], iPhoneTopic, @"The notification should indicate which topic was selected");
 }

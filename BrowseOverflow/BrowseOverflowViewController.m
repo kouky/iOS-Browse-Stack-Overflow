@@ -27,9 +27,8 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view from its nib.
-  self.tableView.delegate = self.tableViewDelegate;
+  self.tableView.delegate = self.dataSource;
   self.tableView.dataSource = self.dataSource;
-  self.tableViewDelegate.tableDataSource = self.dataSource;
 }
 
 - (void)didReceiveMemoryWarning
