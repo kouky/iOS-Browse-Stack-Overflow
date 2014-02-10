@@ -73,4 +73,11 @@
   XCTAssertEqualObjects(@"iPhone", cellTitle, @"Cell's title should be equal to the topic's title");
 }
 
+- (void)testDataSourceIndicatesWhichTopicIsRequiredForAnIndexPath
+{
+  NSIndexPath *firstRow = [NSIndexPath indexPathForRow: 0 inSection: 0];
+  Topic *firstTopic = [dataSource topicForIndexPath:firstRow];
+  XCTAssertEqualObjects(firstTopic.tag, @"iphone", @"The iphone topic is at row zero");
+}
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "TopicTableDataSource.h"
+#import "Topic.h"
 
 NSString *topicCellReuseIdentifier = @"Topic";
 
@@ -25,7 +26,7 @@ NSString *topicCellReuseIdentifier = @"Topic";
   if (!topicCell) {
     topicCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:topicCellReuseIdentifier];
   }
-  topicCell.textLabel.text = [[_topics objectAtIndex:[indexPath row]] name];
+  topicCell.textLabel.text = [[self topicForIndexPath:indexPath] name];
   return topicCell;
 }
 
@@ -38,6 +39,11 @@ NSString *topicCellReuseIdentifier = @"Topic";
 - (void)setTopics:(NSArray *)newTopics
 {
   _topics = newTopics;
+}
+
+- (Topic *)topicForIndexPath:(NSIndexPath *)indexPath
+{
+  return [_topics objectAtIndex:[indexPath row]];
 }
 
 @end
