@@ -31,6 +31,21 @@
   self.tableView.dataSource = self.dataSource;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(userDidSelectTopicNotification:)
+                                               name:TopicTableDidSelectTopicNotification
+                                             object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:TopicTableDidSelectTopicNotification
+                                                object:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];

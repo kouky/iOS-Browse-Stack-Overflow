@@ -11,6 +11,21 @@
 #import "TopicTableDataSource.h"
 #import <objc/runtime.h>
 
+static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociatedNotificationKey";
+
+#pragma mark Categories on BrowseOverflowController
+
+@implementation BrowseOverflowViewController (TestNotificationDelivery)
+
+- (void)userDidSelectTopicNotification:(NSNotification *)note
+{
+  objc_setAssociatedObject(self, notificationKey, note, OBJC_ASSOCIATION_RETAIN);
+}
+
+@end
+
+# pragma mark Tests
+
 @interface BrowseOverflowViewControllerTests : XCTestCase {
   BrowseOverflowViewController *viewController;
   UITableView *tableView;
@@ -30,10 +45,12 @@
   dataSource = [[TopicTableDataSource alloc] init];
   viewController.tableView = tableView;
   viewController.dataSource = dataSource;
+  objc_removeAssociatedObjects(viewController);
 }
 
 - (void)tearDown
 {
+  objc_removeAssociatedObjects(viewController);
   viewController = nil;
   tableView = nil;
   dataSource = nil;
@@ -65,5 +82,32 @@
   XCTAssertEqualObjects([tableView delegate], dataSource, @"View controller should have set the table view's delegate");
 }
 
+- (void)testDefaultStateOfViewControllerDoesNotReceiveNotifications
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:TopicTableDidSelectTopicNotification
+                                                      object:nil
+                                                    userInfo:nil];
+  XCTAssertNil(objc_getAssociatedObject(viewController, notificationKey), @"Notification should not be received before -viewDidAppear:");
+}
+
+- (void)testViewControllerReceivesTableSelectionNotificationAfterViewDidAppear
+{
+  [viewController viewDidAppear:NO];
+  [[NSNotificationCenter defaultCenter] postNotificationName:TopicTableDidSelectTopicNotification
+                                                        object:nil
+                                                    userInfo:nil];
+  XCTAssertNotNil(objc_getAssociatedObject(viewController, notificationKey), @"After -viewDidAppear: the view controller should handle selection notifications");
+}
+
+- (void)testViewControllerDoesNotReceiveTableSelectionNotificationAfterViewWillDisappear
+{
+  [viewController viewDidAppear:NO];
+  [viewController viewWillDisappear:NO];
+  [[NSNotificationCenter defaultCenter] postNotificationName:TopicTableDidSelectTopicNotification
+                                                      object:nil
+                                                    userInfo:nil];
+  XCTAssertNil(objc_getAssociatedObject(viewController, notificationKey), @"After -viewWillDisappear: the view controller should no longer respond to topic notifications");
+  
+}
 
 @end
