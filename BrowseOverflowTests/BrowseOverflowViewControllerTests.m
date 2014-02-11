@@ -12,6 +12,8 @@
 #import <objc/runtime.h>
 
 static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociatedNotificationKey";
+static const char *viewDidAppearkey = "BrowseOverflowViewControllerTestsViewDidAppearKey";
+static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsViewWillDisappearKey";
 
 #pragma mark Categories on BrowseOverflowController
 
@@ -24,17 +26,42 @@ static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociate
 
 @end
 
+@implementation UIViewController (TestSuperClassCalled)
+
+- (void)browseOverflowViewControllerTests_viewDidAppear:(BOOL)animated
+{
+  NSNumber *paramter = [NSNumber numberWithBool:animated];
+  objc_setAssociatedObject(self, viewDidAppearkey, paramter, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (void)browseOverflowViewControllerTests_viewWillDisappear:(BOOL)animated
+{
+  NSNumber *paramter = [NSNumber numberWithBool:animated];
+  objc_setAssociatedObject(self, viewWillDisappearKey, paramter, OBJC_ASSOCIATION_RETAIN);
+}
+
+@end
+
 # pragma mark Tests
 
 @interface BrowseOverflowViewControllerTests : XCTestCase {
   BrowseOverflowViewController *viewController;
   UITableView *tableView;
   id <UITableViewDataSource, UITableViewDataSource> dataSource;
+  SEL realViewDidAppear, testViewDidAppear;
+  SEL realViewWillDisappear, testViewWillDisappear;
 }
 
 @end
 
 @implementation BrowseOverflowViewControllerTests
+
++ (void)swapInstanceMethodsForClass:(Class)cls selector:(SEL)sel1 andSelector:(SEL)sel2
+{
+  Method method1 = class_getInstanceMethod(cls, sel1);
+  Method method2 = class_getInstanceMethod(cls, sel2);
+  method_exchangeImplementations(method1, method2);
+}
 
 - (void)setUp
 {
@@ -46,6 +73,18 @@ static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociate
   viewController.tableView = tableView;
   viewController.dataSource = dataSource;
   objc_removeAssociatedObjects(viewController);
+  
+  realViewDidAppear = @selector(viewDidAppear:);
+  testViewDidAppear = @selector(browseOverflowViewControllerTests_viewDidAppear:);
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[UIViewController class]
+                                                        selector:realViewDidAppear
+                                                     andSelector:testViewDidAppear];
+  
+  realViewWillDisappear = @selector(viewWillDisappear:);
+  testViewWillDisappear = @selector(browseOverflowViewControllerTests_viewWillDisappear:);
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[UIViewController class]
+                                                        selector:realViewWillDisappear
+                                                     andSelector:testViewWillDisappear];
 }
 
 - (void)tearDown
@@ -54,6 +93,14 @@ static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociate
   viewController = nil;
   tableView = nil;
   dataSource = nil;
+
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[UIViewController class]
+                                                        selector:realViewDidAppear
+                                                     andSelector:testViewDidAppear];
+  
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[UIViewController class]
+                                                        selector:realViewWillDisappear
+                                                     andSelector:testViewWillDisappear];
   // Put teardown code here; it will be run once, after the last test case.
   [super tearDown];
 }
@@ -107,7 +154,18 @@ static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociate
                                                       object:nil
                                                     userInfo:nil];
   XCTAssertNil(objc_getAssociatedObject(viewController, notificationKey), @"After -viewWillDisappear: the view controller should no longer respond to topic notifications");
-  
+}
+
+- (void)testViewControllerCallsSuperViewDidAppear
+{
+  [viewController viewDidAppear:NO];
+  XCTAssertNotNil(objc_getAssociatedObject(viewController, viewDidAppearkey), @"-viewDidAppear: should call through to superclass implementation");
+}
+
+- (void)testViewControllerCallsSuperViewWillDisappear
+{
+  [viewController viewWillDisappear:NO];
+  XCTAssertNotNil(objc_getAssociatedObject(viewController, viewWillDisappearKey), @"-viewWillDisappear: should call through to superclass implementation ");
 }
 
 @end
