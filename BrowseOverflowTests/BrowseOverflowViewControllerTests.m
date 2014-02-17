@@ -12,7 +12,7 @@
 #import <objc/runtime.h>
 
 static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociatedNotificationKey";
-static const char *viewDidAppearkey = "BrowseOverflowViewControllerTestsViewDidAppearKey";
+static const char *viewDidAppearKey = "BrowseOverflowViewControllerTestsViewDidAppearKey";
 static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsViewWillDisappearKey";
 
 #pragma mark Categories on BrowseOverflowController
@@ -31,7 +31,7 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 - (void)browseOverflowViewControllerTests_viewDidAppear:(BOOL)animated
 {
   NSNumber *paramter = [NSNumber numberWithBool:animated];
-  objc_setAssociatedObject(self, viewDidAppearkey, paramter, OBJC_ASSOCIATION_RETAIN);
+  objc_setAssociatedObject(self, viewDidAppearKey, paramter, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (void)browseOverflowViewControllerTests_viewWillDisappear:(BOOL)animated
@@ -159,7 +159,7 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 - (void)testViewControllerCallsSuperViewDidAppear
 {
   [viewController viewDidAppear:NO];
-  XCTAssertNotNil(objc_getAssociatedObject(viewController, viewDidAppearkey), @"-viewDidAppear: should call through to superclass implementation");
+  XCTAssertNotNil(objc_getAssociatedObject(viewController, viewDidAppearKey), @"-viewDidAppear: should call through to superclass implementation");
 }
 
 - (void)testViewControllerCallsSuperViewWillDisappear
