@@ -14,4 +14,6 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) id <UITableViewDataSource, UITableViewDelegate> dataSource;
 
+- (void)userDidSelectTopicNotification:(NSNotification *)note;
+
 @end
