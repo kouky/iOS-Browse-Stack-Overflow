@@ -7,6 +7,7 @@
 //
 
 #import "BrowseOverflowViewController.h"
+#import "QuestionListTableDataSource.h"
 
 @interface BrowseOverflowViewController ()
 
@@ -25,7 +26,11 @@
 
 - (void)userDidSelectTopicNotification:(NSNotification *)note
 {
+  Topic *selectedTopic = (Topic *)[note object];
   BrowseOverflowViewController *nextViewController = [[BrowseOverflowViewController alloc] init];
+  QuestionListTableDataSource *questionsDataSource = [[QuestionListTableDataSource alloc] init];
+  questionsDataSource.topic = selectedTopic;
+  nextViewController.dataSource = questionsDataSource;
   [[self navigationController] pushViewController:nextViewController animated:YES];
 }
 
