@@ -23,6 +23,11 @@
   return self;
 }
 
+- (void)userDidSelectTopicNotification:(NSNotification *)note
+{
+
+}
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];

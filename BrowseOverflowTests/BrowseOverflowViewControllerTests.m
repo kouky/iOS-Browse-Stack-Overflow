@@ -19,7 +19,7 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 
 @implementation BrowseOverflowViewController (TestNotificationDelivery)
 
-- (void)userDidSelectTopicNotification:(NSNotification *)note
+- (void)browseOverflowControllerTests_userDidSelectTopicNotification:(NSNotification *)note
 {
   objc_setAssociatedObject(self, notificationKey, note, OBJC_ASSOCIATION_RETAIN);
 }
@@ -50,6 +50,7 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   id <UITableViewDataSource, UITableViewDataSource> dataSource;
   SEL realViewDidAppear, testViewDidAppear;
   SEL realViewWillDisappear, testViewWillDisappear;
+  SEL realUserDidSelectTopic, testUserDidSelectTopic;
 }
 
 @end
@@ -85,6 +86,9 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[UIViewController class]
                                                         selector:realViewWillDisappear
                                                      andSelector:testViewWillDisappear];
+  
+  realUserDidSelectTopic = @selector(userDidSelectTopicNotification:);
+  testUserDidSelectTopic = @selector(browseOverflowControllerTests_userDidSelectTopicNotification:);
 }
 
 - (void)tearDown
@@ -131,29 +135,35 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 
 - (void)testDefaultStateOfViewControllerDoesNotReceiveNotifications
 {
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
   [[NSNotificationCenter defaultCenter] postNotificationName:TopicTableDidSelectTopicNotification
                                                       object:nil
                                                     userInfo:nil];
   XCTAssertNil(objc_getAssociatedObject(viewController, notificationKey), @"Notification should not be received before -viewDidAppear:");
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
 }
 
 - (void)testViewControllerReceivesTableSelectionNotificationAfterViewDidAppear
 {
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
   [viewController viewDidAppear:NO];
   [[NSNotificationCenter defaultCenter] postNotificationName:TopicTableDidSelectTopicNotification
                                                         object:nil
                                                     userInfo:nil];
   XCTAssertNotNil(objc_getAssociatedObject(viewController, notificationKey), @"After -viewDidAppear: the view controller should handle selection notifications");
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
 }
 
 - (void)testViewControllerDoesNotReceiveTableSelectionNotificationAfterViewWillDisappear
 {
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
   [viewController viewDidAppear:NO];
   [viewController viewWillDisappear:NO];
   [[NSNotificationCenter defaultCenter] postNotificationName:TopicTableDidSelectTopicNotification
                                                       object:nil
                                                     userInfo:nil];
   XCTAssertNil(objc_getAssociatedObject(viewController, notificationKey), @"After -viewWillDisappear: the view controller should no longer respond to topic notifications");
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
 }
 
 - (void)testViewControllerCallsSuperViewDidAppear
