@@ -11,6 +11,7 @@
 #import "Topic.h"
 #import "Question.h"
 #import "Person.h"
+#import "AvatarStore.h"
 
 @implementation QuestionListTableDataSource
 
@@ -33,9 +34,15 @@
     self.summaryCell.scoreLabel.text = [NSString stringWithFormat:@"%d", question.score];
     self.summaryCell.nameLabel.text = question.asker.name;
     
+    NSData *avatarData = [self.avatarStore dataForURL:question.asker.avatarURL];
+    if (avatarData) {
+      self.summaryCell.avatarView.image = [UIImage imageWithData:avatarData];
+    }
+    
     cell = self.summaryCell;
     self.summaryCell = nil;
-  } else {
+  }
+  else {
     cell = [tableView dequeueReusableCellWithIdentifier:@"placeholder"];
     if (!cell) {
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"placeholder"];
@@ -44,6 +51,21 @@
   }
   
   return cell;
+}
+
+- (void)registerForUpdatesToAvatarStore:(AvatarStore *)store
+{
+  [self.notificationCenter addObserver:self selector:@selector(avatarStoreDidUpdateContent:) name:AvatarStoreDidUpdateContentNotification object:store];
+}
+
+- (void)removeObservationOfUpdatesToAvatarStore:(AvatarStore *)store
+{
+  [self.notificationCenter removeObserver:self name:AvatarStoreDidUpdateContentNotification object:store];
+}
+
+- (void)avatarStoreDidUpdateContent:(NSNotification *)note
+{
+  [self.tableView reloadData];
 }
 
 @end

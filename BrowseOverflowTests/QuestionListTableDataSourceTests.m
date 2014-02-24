@@ -12,6 +12,10 @@
 #import "Topic.h"
 #import "Question.h"
 #import "Person.h"
+#import "AvatarStore.h"
+#import "AvatarStore+TestingExtensions.h"
+#import "FakeNotificationCenter.h"
+#import "ReloadDataWatcher.h"
 
 @interface QuestionListTableDataSourceTests : XCTestCase {
   QuestionListTableDataSource *dataSource;
@@ -19,11 +23,18 @@
   NSIndexPath *firstCell;
   Question *question1, *question2;
   Person *asker1;
+  AvatarStore *store;
+  NSNotification *receivedNotification;
 }
 
 @end
 
 @implementation QuestionListTableDataSourceTests
+
+- (void)didReceiveNotification: (NSNotification *)note
+{
+  receivedNotification = note;
+}
 
 - (void)setUp
 {
@@ -41,6 +52,8 @@
   
   asker1 = [[Person alloc] initWithName:@"Graham Lee" avatarLocation:@"http://www.gravatar.com/avatar/563290c0c1b776a315b36e863b388a0c"];
   question1.asker = asker1;
+  
+  store = [[AvatarStore alloc] init];
 }
 
 - (void)tearDown
@@ -51,6 +64,8 @@
   question1 = nil;
   question2 = nil;
   asker1 = nil;
+  store = nil;
+  receivedNotification = nil;
   // Put teardown code here; it will be run once, after the last test case.
   [super tearDown];
 }
@@ -88,6 +103,42 @@
   XCTAssertEqualObjects(cell.titleLabel.text, @"Question One", @"Question cells display the question's title");
   XCTAssertEqualObjects(cell.scoreLabel.text, @"2", @"Question cells display the question's scores");
   XCTAssertEqualObjects(cell.nameLabel.text, @"Graham Lee", @"Question cells display the asker's name");
+}
+
+- (void)testCellGetsImageFromAvatarStore
+{
+  dataSource.avatarStore = store;
+  NSURL *imageURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"Graham_Lee" withExtension:@"jpg"];
+  NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+  [store setData:imageData forLocation:@"http://www.gravatar.com/avatar/563290c0c1b776a315b36e863b388a0c"];
+  [iPhoneTopic addQuestion:question1];
+  QuestionSummaryCell *cell = (QuestionSummaryCell *)[dataSource tableView:nil cellForRowAtIndexPath:firstCell];
+  XCTAssertNotNil(cell.avatarView.image, @"The avatar store should supply the avatar image");
+}
+
+- (void)testQuestionListRegistersForAvatarNotifications
+{
+  FakeNotificationCenter *center = [[FakeNotificationCenter alloc] init];
+  dataSource.notificationCenter = (NSNotificationCenter *)center;
+  [dataSource registerForUpdatesToAvatarStore:store];
+  XCTAssertTrue([center hasObject:dataSource forNotification:AvatarStoreDidUpdateContentNotification], @"The data source should know when new images have been downloaded");
+}
+
+- (void)testQuestionListStopsRegisteringForAvatarNotifications
+{
+  FakeNotificationCenter *center = [[FakeNotificationCenter alloc] init];
+  dataSource.notificationCenter = (NSNotificationCenter *)center;
+  [dataSource registerForUpdatesToAvatarStore:store];
+  [dataSource removeObservationOfUpdatesToAvatarStore:store];
+  XCTAssertFalse([center hasObject:dataSource forNotification:AvatarStoreDidUpdateContentNotification], @"The data source  should no longer listen to avatar store notifications");
+}
+
+- (void)testQuestionListCausesTableReloadOnAvatarNotification
+{
+  ReloadDataWatcher *fakeTableView = [[ReloadDataWatcher alloc] init];
+  dataSource.tableView = (UITableView *)fakeTableView;
+  [dataSource avatarStoreDidUpdateContent:nil];
+  XCTAssertTrue([fakeTableView didReceiveReloadData], @"Data source should get the table view to reload when new data is available");
 }
 
 @end

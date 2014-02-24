@@ -36,9 +36,14 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i8b-rE-9vy">
+                        <rect key="frame" x="272" y="7" width="28" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="avatarView" destination="i8b-rE-9vy" id="1wX-gu-k3g"/>
                 <outlet property="nameLabel" destination="V16-XH-g5L" id="xSf-2R-Ywv"/>
                 <outlet property="scoreLabel" destination="Wgc-K9-do8" id="bin-TY-psW"/>
                 <outlet property="titleLabel" destination="kPX-Bo-zm9" id="eUT-5y-ODj"/>

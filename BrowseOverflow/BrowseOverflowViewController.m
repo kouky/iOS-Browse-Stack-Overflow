@@ -8,6 +8,7 @@
 
 #import "BrowseOverflowViewController.h"
 #import "QuestionListTableDataSource.h"
+#import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
 
@@ -40,6 +41,19 @@
   // Do any additional setup after loading the view from its nib.
   self.tableView.delegate = self.dataSource;
   self.tableView.dataSource = self.dataSource;
+  
+  // Key value coding doesn't work here?!
+  
+  // objc_property_t tableViewProperty = class_getProperty([self.dataSource class], "tableView");
+  // if (tableViewProperty) {
+  //  [self.dataSource setValue: tableView forKey: @"tableView"];
+  // }
+
+  // So instead we do this.
+  if ([self.dataSource isKindOfClass:[QuestionListTableDataSource class]]) {
+    QuestionListTableDataSource *questionListTableDataSource = (QuestionListTableDataSource *)self.dataSource;
+    questionListTableDataSource.tableView = self.tableView;
+  }
 }
 
 - (void)viewDidAppear:(BOOL)animated
