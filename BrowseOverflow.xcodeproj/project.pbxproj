@@ -78,6 +78,17 @@
 		27FF881918B841380064B397 /* AvatarStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FF881818B841380064B397 /* AvatarStore.m */; };
 		27FF881A18B841380064B397 /* AvatarStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FF881818B841380064B397 /* AvatarStore.m */; };
 		27FF881C18B855B30064B397 /* Graham_Lee.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 27FF881B18B855B30064B397 /* Graham_Lee.jpg */; };
+		27FFC76018C173CD0037666D /* QuestionDetailDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FFC75F18C173CD0037666D /* QuestionDetailDataSource.m */; };
+		27FFC76118C173CD0037666D /* QuestionDetailDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FFC75F18C173CD0037666D /* QuestionDetailDataSource.m */; };
+		27FFC76318C174060037666D /* QuestionDetailDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FFC76218C174060037666D /* QuestionDetailDataSourceTests.m */; };
+		27FFC76518C180250037666D /* QuestionDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FFC76418C180250037666D /* QuestionDetailCell.xib */; };
+		27FFC76618C180250037666D /* QuestionDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FFC76418C180250037666D /* QuestionDetailCell.xib */; };
+		27FFC76918C1A1FC0037666D /* QuestionDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FFC76818C1A1FC0037666D /* QuestionDetailCell.m */; };
+		27FFC76A18C1A1FC0037666D /* QuestionDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FFC76818C1A1FC0037666D /* QuestionDetailCell.m */; };
+		27FFC76C18C1A50D0037666D /* AnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FFC76B18C1A50D0037666D /* AnswerCell.xib */; };
+		27FFC76D18C1A50D0037666D /* AnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FFC76B18C1A50D0037666D /* AnswerCell.xib */; };
+		27FFC77018C1A5250037666D /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FFC76F18C1A5250037666D /* AnswerCell.m */; };
+		27FFC77118C1A5250037666D /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FFC76F18C1A5250037666D /* AnswerCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +191,15 @@
 		27FF881718B841380064B397 /* AvatarStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarStore.h; sourceTree = "<group>"; };
 		27FF881818B841380064B397 /* AvatarStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarStore.m; sourceTree = "<group>"; };
 		27FF881B18B855B30064B397 /* Graham_Lee.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Graham_Lee.jpg; sourceTree = "<group>"; };
+		27FFC75E18C173CD0037666D /* QuestionDetailDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailDataSource.h; sourceTree = "<group>"; };
+		27FFC75F18C173CD0037666D /* QuestionDetailDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailDataSource.m; sourceTree = "<group>"; };
+		27FFC76218C174060037666D /* QuestionDetailDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailDataSourceTests.m; sourceTree = "<group>"; };
+		27FFC76418C180250037666D /* QuestionDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionDetailCell.xib; sourceTree = "<group>"; };
+		27FFC76718C1A1FC0037666D /* QuestionDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailCell.h; sourceTree = "<group>"; };
+		27FFC76818C1A1FC0037666D /* QuestionDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailCell.m; sourceTree = "<group>"; };
+		27FFC76B18C1A50D0037666D /* AnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerCell.xib; sourceTree = "<group>"; };
+		27FFC76E18C1A5250037666D /* AnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCell.h; sourceTree = "<group>"; };
+		27FFC76F18C1A5250037666D /* AnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +261,9 @@
 			children = (
 				270A46F018948D0400D9CB53 /* AppDelegate.h */,
 				270A46F118948D0400D9CB53 /* AppDelegate.m */,
+				27FFC76E18C1A5250037666D /* AnswerCell.h */,
+				27FFC76F18C1A5250037666D /* AnswerCell.m */,
+				27FFC76B18C1A50D0037666D /* AnswerCell.xib */,
 				27FF881718B841380064B397 /* AvatarStore.h */,
 				27FF881818B841380064B397 /* AvatarStore.m */,
 				27D093B618BAC58300F16631 /* GravatarCommunicator.h */,
@@ -272,6 +295,11 @@
 				270A473218977EAC00D9CB53 /* Topic.m */,
 				27ECD46918A5D9D30078B9A7 /* TopicTableDataSource.h */,
 				27ECD46A18A5D9D30078B9A7 /* TopicTableDataSource.m */,
+				27FFC76418C180250037666D /* QuestionDetailCell.xib */,
+				27FFC76718C1A1FC0037666D /* QuestionDetailCell.h */,
+				27FFC76818C1A1FC0037666D /* QuestionDetailCell.m */,
+				27FFC75E18C173CD0037666D /* QuestionDetailDataSource.h */,
+				27FFC75F18C173CD0037666D /* QuestionDetailDataSource.m */,
 				2779DD0F18B5FC8B00FA1408 /* QuestionListTableDataSource.h */,
 				2779DD1018B5FC8B00FA1408 /* QuestionListTableDataSource.m */,
 				2706F77D18B6D80E0085BE36 /* QuestionSummaryCell.h */,
@@ -309,6 +337,7 @@
 				27B7CB13189F3F3600A3824E /* QuestionBuilderTests.m */,
 				270A471F1896FDF400D9CB53 /* QuestionTests.m */,
 				271DADBF1899AB51009F0F65 /* QuestionCreationWorkflowTests.m */,
+				27FFC76218C174060037666D /* QuestionDetailDataSourceTests.m */,
 				2706F77718B6C1ED0085BE36 /* QuestionListTableDataSourceTests.m */,
 				27E3807218A22CA7006EE6C9 /* StackOverflowCommunicatorTests.m */,
 				27F2A07118A83C150032A1BC /* TopicTableDataSourceTests.m */,
@@ -433,8 +462,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27FFC76518C180250037666D /* QuestionDetailCell.xib in Resources */,
 				27ECD46518A5B1660078B9A7 /* BrowseOverflowViewController.xib in Resources */,
 				2706F78218B6DB2C0085BE36 /* QuestionSummaryCell.xib in Resources */,
+				27FFC76C18C1A50D0037666D /* AnswerCell.xib in Resources */,
 				270A46FD18948D0400D9CB53 /* Images.xcassets in Resources */,
 				270A46EC18948D0400D9CB53 /* InfoPlist.strings in Resources */,
 				270A46F518948D0400D9CB53 /* Main.storyboard in Resources */,
@@ -446,6 +477,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				27ECD46618A5B1660078B9A7 /* BrowseOverflowViewController.xib in Resources */,
+				27FFC76D18C1A50D0037666D /* AnswerCell.xib in Resources */,
+				27FFC76618C180250037666D /* QuestionDetailCell.xib in Resources */,
 				2706F78318B6DB2C0085BE36 /* QuestionSummaryCell.xib in Resources */,
 				27FF881C18B855B30064B397 /* Graham_Lee.jpg in Resources */,
 				270A470E18948D0400D9CB53 /* InfoPlist.strings in Resources */,
@@ -459,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27FFC77018C1A5250037666D /* AnswerCell.m in Sources */,
 				27B7CB0B189F0B0E00A3824E /* QuestionBuilder.m in Sources */,
 				270A46F218948D0400D9CB53 /* AppDelegate.m in Sources */,
 				27B7CB17189F628300A3824E /* UserBuilder.m in Sources */,
@@ -471,7 +505,9 @@
 				270A472F18974A1D00D9CB53 /* Answer.m in Sources */,
 				27FF881918B841380064B397 /* AvatarStore.m in Sources */,
 				270A46EE18948D0400D9CB53 /* main.m in Sources */,
+				27FFC76018C173CD0037666D /* QuestionDetailDataSource.m in Sources */,
 				270A47231896FE6B00D9CB53 /* Question.m in Sources */,
+				27FFC76918C1A1FC0037666D /* QuestionDetailCell.m in Sources */,
 				271DADC41899B002009F0F65 /* StackOverflowManager.m in Sources */,
 				27D093B818BAC58300F16631 /* GravatarCommunicator.m in Sources */,
 				270A46FB18948D0400D9CB53 /* DetailViewController.m in Sources */,
@@ -495,6 +531,7 @@
 				270D2BBC18A872DD00435523 /* TopicTableDelegateTests.m in Sources */,
 				27E3807C18A245AB006EE6C9 /* MockStackOverflowManager.m in Sources */,
 				27B7CB18189F628300A3824E /* UserBuilder.m in Sources */,
+				27FFC76318C174060037666D /* QuestionDetailDataSourceTests.m in Sources */,
 				270A473418977EAC00D9CB53 /* Topic.m in Sources */,
 				27E3807318A22CA7006EE6C9 /* StackOverflowCommunicatorTests.m in Sources */,
 				27D093C018BACFD400F16631 /* AvatarStoreTests.m in Sources */,
@@ -504,12 +541,15 @@
 				2706F77818B6C1ED0085BE36 /* QuestionListTableDataSourceTests.m in Sources */,
 				27E3807F18A24D04006EE6C9 /* FakeURLResponse.m in Sources */,
 				27FF881618B83F6C0064B397 /* ReloadDataWatcher.m in Sources */,
+				27FFC77118C1A5250037666D /* AnswerCell.m in Sources */,
+				27FFC76A18C1A1FC0037666D /* QuestionDetailCell.m in Sources */,
 				27DCCBFE189B596D00263241 /* MockStackoverflowCommunicator.m in Sources */,
 				27ECD46B18A5D9D30078B9A7 /* TopicTableDataSource.m in Sources */,
 				27B7CB0C189F0B0E00A3824E /* QuestionBuilder.m in Sources */,
 				27E3807618A23059006EE6C9 /* InspectableStackOverflowCommunicator.m in Sources */,
 				270A472A1897212000D9CB53 /* Person.m in Sources */,
 				270A471A18949C7700D9CB53 /* TopicTests.m in Sources */,
+				27FFC76118C173CD0037666D /* QuestionDetailDataSource.m in Sources */,
 				270A473018974A1D00D9CB53 /* Answer.m in Sources */,
 				270A47241896FE6B00D9CB53 /* Question.m in Sources */,
 				27E3807918A24324006EE6C9 /* NonNetworkedStackOverflowCommunicator.m in Sources */,
