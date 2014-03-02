@@ -140,6 +140,14 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   XCTAssertEqualObjects([tableView delegate], dataSource, @"View controller should have set the table view's delegate");
 }
 
+- (void)testViewControllerConnectsTableViewBacklinkInViewDidLoad
+{
+  QuestionListTableDataSource *questionDataSource = [[QuestionListTableDataSource alloc] init];
+  viewController.dataSource = questionDataSource;
+  [viewController viewDidLoad];
+  XCTAssertEqualObjects(questionDataSource.tableView, tableView, @"Backlink to tableview should be set in datasource");
+}
+
 - (void)testDefaultStateOfViewControllerDoesNotReceiveNotifications
 {
   [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
@@ -150,7 +158,7 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
 }
 
-- (void)testViewControllerReceivesTableSelectionNotificationAfterViewDidAppear
+- (void)testViewControllerReceivesTopicSelectionNotificationAfterViewDidAppear
 {
   [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
   [viewController viewDidAppear:NO];
@@ -161,7 +169,7 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
 }
 
-- (void)testViewControllerDoesNotReceiveTableSelectionNotificationAfterViewWillDisappear
+- (void)testViewControllerDoesNotReceiveTopicSelectNotificationAfterViewWillDisappear
 {
   [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
   [viewController viewDidAppear:NO];
@@ -201,14 +209,6 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   BrowseOverflowViewController *nextViewController = (BrowseOverflowViewController *)[navController topViewController];
   XCTAssertTrue([nextViewController.dataSource isKindOfClass:[QuestionListTableDataSource class]], @"Selecting a topic should push a list of questions");
   XCTAssertEqualObjects([(QuestionListTableDataSource *)nextViewController.dataSource topic], iPhoneTopic, @"The questions to display shoudl come from the selected topic");
-}
-
-- (void)testViewControllerConnectsTableViewBacklinkInViewDidLoad
-{
-  QuestionListTableDataSource *questionDataSource = [[QuestionListTableDataSource alloc] init];
-  viewController.dataSource = questionDataSource;
-  [viewController viewDidLoad];
-  XCTAssertEqualObjects(questionDataSource.tableView, tableView, @"Backlink to tableview should be set in datasource");
 }
 
 @end
