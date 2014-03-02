@@ -8,6 +8,7 @@
 
 #import "BrowseOverflowViewController.h"
 #import "QuestionListTableDataSource.h"
+#import "QuestionDetailDataSource.h"
 #import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
@@ -35,6 +36,16 @@
   [[self navigationController] pushViewController:nextViewController animated:YES];
 }
 
+- (void)userDidSelectQuestionNotification:(NSNotification *)note
+{
+  Question *selectedQuestion = (Question *)[note object];
+  BrowseOverflowViewController *nextViewController = [[BrowseOverflowViewController alloc] init];
+  QuestionDetailDataSource *questionDetailDataSource = [[QuestionDetailDataSource alloc] init];
+  questionDetailDataSource.question = selectedQuestion;
+  nextViewController.dataSource = questionDetailDataSource;
+  [[self navigationController] pushViewController:nextViewController animated:YES];
+}
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -58,19 +69,29 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+  [super viewDidAppear:animated];
+  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(userDidSelectTopicNotification:)
                                                name:TopicTableDidSelectTopicNotification
                                              object:nil];
-  [super viewDidAppear:animated];
+  
+  [[NSNotificationCenter defaultCenter] addObserver: self
+                                           selector: @selector(userDidSelectQuestionNotification:)
+                                               name: QuestionListDidSelectQuestionNotification
+                                             object: nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+  [super viewWillDisappear:animated];
+  
   [[NSNotificationCenter defaultCenter] removeObserver:self
                                                   name:TopicTableDidSelectTopicNotification
                                                 object:nil];
-  [super viewWillDisappear:animated];
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:QuestionListDidSelectQuestionNotification
+                                                object: nil];
 }
 
 - (void)didReceiveMemoryWarning
