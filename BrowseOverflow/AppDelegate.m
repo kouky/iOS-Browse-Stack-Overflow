@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "BrowseOverflowViewController.h"
 
 @implementation AppDelegate
 
@@ -16,8 +17,11 @@
 
   // Override point for customization after application launch.
   self.navigationController = [[UINavigationController alloc] init];
+  BrowseOverflowViewController *firstViewController = [[BrowseOverflowViewController alloc] initWithNibName:nil bundle:nil];
+  TopicTableDataSource *dataSource = [[TopicTableDataSource alloc] init];
+  firstViewController.dataSource = dataSource;
+  self.navigationController.viewControllers = @[firstViewController];
   [self.window setRootViewController:self.navigationController];
-  
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];

@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "AppDelegate.h"
+#import "BrowseOverflowViewController.h"
 
 @interface AppDelegateTests : XCTestCase {
   AppDelegate *appDelegate;
@@ -45,6 +46,18 @@
 - (void)testAppDidFinishLaunchingReturnsYES
 {
   XCTAssertTrue(didFinishLaunchingWithOptionsReturn, @"Method should return YES");
+}
+
+- (void)testNavigationControllerShowsABrowseOverflowViewController
+{
+  id visibleViewController = appDelegate.navigationController.topViewController;
+  XCTAssertTrue([visibleViewController isKindOfClass:[BrowseOverflowViewController class]], @"Views in this app are supplied by BrowseOverflowViewControllers");
+}
+
+- (void)testFirstViewControllerHasATopicTableDataSource
+{
+  BrowseOverflowViewController *viewController = (BrowseOverflowViewController *)appDelegate.navigationController.topViewController;
+  XCTAssertTrue([viewController.dataSource isKindOfClass:[TopicTableDataSource class]], @"First view should display a list of topics");
 }
 
 @end
