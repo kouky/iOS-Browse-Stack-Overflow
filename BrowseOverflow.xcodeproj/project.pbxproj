@@ -18,7 +18,6 @@
 		270A46EC18948D0400D9CB53 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 270A46EA18948D0400D9CB53 /* InfoPlist.strings */; };
 		270A46EE18948D0400D9CB53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A46ED18948D0400D9CB53 /* main.m */; };
 		270A46F218948D0400D9CB53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A46F118948D0400D9CB53 /* AppDelegate.m */; };
-		270A46F518948D0400D9CB53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 270A46F318948D0400D9CB53 /* Main.storyboard */; };
 		270A46F818948D0400D9CB53 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A46F718948D0400D9CB53 /* MasterViewController.m */; };
 		270A46FB18948D0400D9CB53 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A46FA18948D0400D9CB53 /* DetailViewController.m */; };
 		270A46FD18948D0400D9CB53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 270A46FC18948D0400D9CB53 /* Images.xcassets */; };
@@ -42,6 +41,8 @@
 		271DADC01899AB51009F0F65 /* QuestionCreationWorkflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADBF1899AB51009F0F65 /* QuestionCreationWorkflowTests.m */; };
 		271DADC41899B002009F0F65 /* StackOverflowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADC31899B002009F0F65 /* StackOverflowManager.m */; };
 		271DADC51899B002009F0F65 /* StackOverflowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 271DADC31899B002009F0F65 /* StackOverflowManager.m */; };
+		276B7A3F18C40F7800B2F792 /* AppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B7A3E18C40F7800B2F792 /* AppDelegateTests.m */; };
+		276B7A4018C4196F00B2F792 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 270A46F118948D0400D9CB53 /* AppDelegate.m */; };
 		2779DD1118B5FC8B00FA1408 /* QuestionListTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779DD1018B5FC8B00FA1408 /* QuestionListTableDataSource.m */; };
 		2779DD1218B5FC8B00FA1408 /* QuestionListTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779DD1018B5FC8B00FA1408 /* QuestionListTableDataSource.m */; };
 		277E2004189A22960042983A /* MockStackoverflowManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 277E2003189A22960042983A /* MockStackoverflowManagerDelegate.m */; };
@@ -116,7 +117,6 @@
 		270A46EF18948D0400D9CB53 /* BrowseOverflow-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BrowseOverflow-Prefix.pch"; sourceTree = "<group>"; };
 		270A46F018948D0400D9CB53 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		270A46F118948D0400D9CB53 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		270A46F418948D0400D9CB53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		270A46F618948D0400D9CB53 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		270A46F718948D0400D9CB53 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		270A46F918948D0400D9CB53 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -142,6 +142,7 @@
 		271DADBF1899AB51009F0F65 /* QuestionCreationWorkflowTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCreationWorkflowTests.m; sourceTree = "<group>"; };
 		271DADC21899B002009F0F65 /* StackOverflowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowManager.h; sourceTree = "<group>"; };
 		271DADC31899B002009F0F65 /* StackOverflowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackOverflowManager.m; sourceTree = "<group>"; };
+		276B7A3E18C40F7800B2F792 /* AppDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegateTests.m; sourceTree = "<group>"; };
 		2779DD0F18B5FC8B00FA1408 /* QuestionListTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionListTableDataSource.h; sourceTree = "<group>"; };
 		2779DD1018B5FC8B00FA1408 /* QuestionListTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionListTableDataSource.m; sourceTree = "<group>"; };
 		277E1FFD189A136D0042983A /* StackOverflowManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowManagerDelegate.h; sourceTree = "<group>"; };
@@ -272,7 +273,6 @@
 				27ECD46018A5B1660078B9A7 /* BrowseOverflowViewController.h */,
 				27ECD46118A5B1660078B9A7 /* BrowseOverflowViewController.m */,
 				27ECD46218A5B1660078B9A7 /* BrowseOverflowViewController.xib */,
-				270A46F318948D0400D9CB53 /* Main.storyboard */,
 				270A46F618948D0400D9CB53 /* MasterViewController.h */,
 				270A46F718948D0400D9CB53 /* MasterViewController.m */,
 				270A46F918948D0400D9CB53 /* DetailViewController.h */,
@@ -328,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				270A472B189749F300D9CB53 /* AnswerTests.m */,
+				276B7A3E18C40F7800B2F792 /* AppDelegateTests.m */,
 				27D093BF18BACFD400F16631 /* AvatarStoreTests.m */,
 				27D093C118BAD0F500F16631 /* AvatarStore+TestingExtensions.h */,
 				27D093C218BAD0F500F16631 /* AvatarStore+TestingExtensions.m */,
@@ -468,7 +469,6 @@
 				27FFC76C18C1A50D0037666D /* AnswerCell.xib in Resources */,
 				270A46FD18948D0400D9CB53 /* Images.xcassets in Resources */,
 				270A46EC18948D0400D9CB53 /* InfoPlist.strings in Resources */,
-				270A46F518948D0400D9CB53 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				276B7A4018C4196F00B2F792 /* AppDelegate.m in Sources */,
 				27D093B918BAC58300F16631 /* GravatarCommunicator.m in Sources */,
 				27DCCC02189B5DC300263241 /* StackOverflowCommunicator.m in Sources */,
 				27B7CB0F189F0BFD00A3824E /* FakeQuestionBuilder.m in Sources */,
@@ -531,6 +532,7 @@
 				270D2BBC18A872DD00435523 /* TopicTableDelegateTests.m in Sources */,
 				27E3807C18A245AB006EE6C9 /* MockStackOverflowManager.m in Sources */,
 				27B7CB18189F628300A3824E /* UserBuilder.m in Sources */,
+				276B7A3F18C40F7800B2F792 /* AppDelegateTests.m in Sources */,
 				27FFC76318C174060037666D /* QuestionDetailDataSourceTests.m in Sources */,
 				270A473418977EAC00D9CB53 /* Topic.m in Sources */,
 				27E3807318A22CA7006EE6C9 /* StackOverflowCommunicatorTests.m in Sources */,
@@ -582,14 +584,6 @@
 				270A46EB18948D0400D9CB53 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		270A46F318948D0400D9CB53 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				270A46F418948D0400D9CB53 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		270A470C18948D0400D9CB53 /* InfoPlist.strings */ = {
