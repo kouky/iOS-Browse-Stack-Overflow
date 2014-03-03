@@ -60,4 +60,10 @@
   XCTAssertTrue([viewController.dataSource isKindOfClass:[TopicTableDataSource class]], @"First view should display a list of topics");
 }
 
+- (void)testTopicListIsNotEmptyOnAppLaunch
+{
+  id <UITableViewDataSource> dataSource = [(BrowseOverflowViewController *)[appDelegate.navigationController topViewController] dataSource];
+  XCTAssertFalse([dataSource tableView:nil numberOfRowsInSection:0] == 0, @"There should be some rows to display");
+}
+
 @end
