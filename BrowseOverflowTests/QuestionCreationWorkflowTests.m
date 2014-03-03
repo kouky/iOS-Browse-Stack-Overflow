@@ -10,16 +10,16 @@
 #import "StackOverflowManager.h"
 #import "MockStackOverflowManagerDelegate.h"
 #import "Topic.h"
-#import "MockStackoverflowCommunicator.h"
+#import "MockStackOverflowCommunicator.h"
 #import "FakeQuestionBuilder.h"
 #import "Question.h"
 
 @interface QuestionCreationWorkflowTests : XCTestCase {
     StackOverflowManager *mgr;
-    MockStackoverflowManagerDelegate *delegate;
+    MockStackOverflowManagerDelegate *delegate;
     FakeQuestionBuilder *questionBuilder;
     Question *questionToFetch;
-    MockStackoverflowCommunicator *communicator;
+    MockStackOverflowCommunicator *communicator;
     NSArray *questionArray;
     NSError *underlyingError;
 }
@@ -32,8 +32,8 @@
     [super setUp];
     // Put setup code here; it will be run once, before the first test case.
     mgr = [[StackOverflowManager alloc] init];
-    delegate = [[MockStackoverflowManagerDelegate alloc] init];
-    communicator = [[MockStackoverflowCommunicator alloc] init];
+    delegate = [[MockStackOverflowManagerDelegate alloc] init];
+    communicator = [[MockStackOverflowCommunicator alloc] init];
     questionBuilder = [[FakeQuestionBuilder alloc] init];
     questionToFetch = [[Question alloc] init];
     questionToFetch.questionID = 1234;

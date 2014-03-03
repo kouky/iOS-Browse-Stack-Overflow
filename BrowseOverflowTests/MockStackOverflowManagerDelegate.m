@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Michael Koukoullis. All rights reserved.
 //
 
-#import "MockStackoverflowManagerDelegate.h"
+#import "MockStackOverflowManagerDelegate.h"
 
-@implementation MockStackoverflowManagerDelegate
+@implementation MockStackOverflowManagerDelegate
 
 - (void)fetchQuestionsFailedWithError:(NSError *)error
 {

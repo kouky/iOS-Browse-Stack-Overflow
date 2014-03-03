@@ -8,7 +8,7 @@
 
 #import "StackOverflowCommunicator.h"
 
-@interface MockStackoverflowCommunicator : StackOverflowCommunicator
+@interface MockStackOverflowCommunicator : StackOverflowCommunicator
 @property (nonatomic, readonly) BOOL wasAskedToFetchQuestions;
 @property (nonatomic, readonly) BOOL wasAskedToFetchBody;
 @end

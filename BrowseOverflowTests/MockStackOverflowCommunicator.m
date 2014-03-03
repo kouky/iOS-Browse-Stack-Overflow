@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Michael Koukoullis. All rights reserved.
 //
 
-#import "MockStackoverflowCommunicator.h"
+#import "MockStackOverflowCommunicator.h"
 
-@interface MockStackoverflowCommunicator ()
+@interface MockStackOverflowCommunicator ()
 @property (nonatomic, readwrite) BOOL wasAskedToFetchQuestions;
 @property (nonatomic, readwrite) BOOL wasAskedToFetchBody;
 @end
 
-@implementation MockStackoverflowCommunicator
+@implementation MockStackOverflowCommunicator
 
 - (void)searchForQuestionsWithTag:(NSString *)tag
 {
