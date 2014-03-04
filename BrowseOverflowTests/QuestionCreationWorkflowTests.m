@@ -84,7 +84,7 @@
 - (void)testErrorReturnedToDelegateIsNotErrorNotifiedByComminicator
 {
     [mgr searchingForQuestionsFailedWithError:underlyingError];
-    XCTAssertFalse(underlyingError == [delegate fetchError], @"Error shoudl be at the correct level of abstraction");
+    XCTAssertFalse(underlyingError == [delegate fetchError], @"Error should be at the correct level of abstraction");
 }
 
 - (void)testErrorReturnedToDelegateDocumentsUnderlingError

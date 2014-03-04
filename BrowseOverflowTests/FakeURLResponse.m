@@ -10,14 +10,16 @@
 
 @implementation FakeURLResponse
 
-- (id)initWithStatusCode:(NSInteger)code {
+- (id)initWithStatusCode:(NSInteger)code
+{
     if ((self = [super init])) {
         statusCode = code;
     }
     return self;
 }
 
-- (NSInteger)statusCode {
+- (NSInteger)statusCode
+{
     return statusCode;
 }
 
