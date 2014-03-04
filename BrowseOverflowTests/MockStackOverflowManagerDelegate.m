@@ -12,12 +12,22 @@
 
 - (void)fetchQuestionsFailedWithError:(NSError *)error
 {
-    self.fetchError = error;
+  self.fetchError = error;
 }
 
 - (void)didReceiveQuestions:(NSArray *)questions
 {
-    self.receivedQuestions = questions;
+  self.receivedQuestions = questions;
+}
+
+- (void)retrievingAnswersFailedWithError:(NSError *)error
+{
+  self.fetchError = error;
+}
+
+- (void)answersReceivedForQuestion:(Question *)question
+{
+  self.successQuestion = question;
 }
 
 @end

@@ -8,21 +8,47 @@
 
 #import "MockStackOverflowCommunicator.h"
 
-@interface MockStackOverflowCommunicator ()
-@property (nonatomic, readwrite) BOOL wasAskedToFetchQuestions;
-@property (nonatomic, readwrite) BOOL wasAskedToFetchBody;
-@end
+@implementation MockStackOverflowCommunicator {
+  BOOL wasAskedToFetchQuestions;
+  BOOL wasAskedToFetchBody;
+  NSInteger questionID;
+}
 
-@implementation MockStackOverflowCommunicator
+- (id)init {
+  if ((self = [super init])) {
+    questionID = NSNotFound;
+  }
+  return self;
+}
 
 - (void)searchForQuestionsWithTag:(NSString *)tag
 {
-    self.wasAskedToFetchQuestions = YES;
+  wasAskedToFetchQuestions = YES;
 }
 
-- (void)downloadInformationForQuestionWithID:(NSInteger)questionID
+- (void)downloadInformationForQuestionWithID:(NSInteger)identifier
 {
-    self.wasAskedToFetchBody = YES;
+  wasAskedToFetchBody = YES;
+}
+
+- (void)downloadAnswersToQuestionWithID:(NSInteger)identifier
+{
+  questionID = identifier;
+}
+
+- (BOOL)wasAskedToFetchQuestions
+{
+  return wasAskedToFetchQuestions;
+}
+
+- (BOOL)wasAskedToFetchBody
+{
+  return wasAskedToFetchBody;
+}
+
+- (NSInteger)askedForAnswersToQuestionID
+{
+  return questionID;
 }
 
 @end

@@ -9,7 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "StackOverflowManagerDelegate.h"
 
+@class Question;
+
 @interface MockStackOverflowManagerDelegate : NSObject <StackOverflowManagerDelegate>
+
 @property (nonatomic) NSError *fetchError;
 @property (nonatomic) NSArray *receivedQuestions;
+@property (strong) Question *successQuestion;
+
 @end

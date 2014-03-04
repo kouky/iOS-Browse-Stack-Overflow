@@ -9,6 +9,9 @@
 #import "StackOverflowCommunicator.h"
 
 @interface MockStackOverflowCommunicator : StackOverflowCommunicator
-@property (nonatomic, readonly) BOOL wasAskedToFetchQuestions;
-@property (nonatomic, readonly) BOOL wasAskedToFetchBody;
+
+- (BOOL)wasAskedToFetchQuestions;
+- (BOOL)wasAskedToFetchBody;
+- (NSInteger)askedForAnswersToQuestionID;
+
 @end

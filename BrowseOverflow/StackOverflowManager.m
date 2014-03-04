@@ -10,6 +10,8 @@
 #import "StackOverflowCommunicator.h"
 #import "Topic.h"
 #import "Question.h"
+#import "AnswerBuilder.h"
+#import "QuestionBuilder.h"
 
 @interface StackOverflowManager ()
 @property (nonatomic) Question *questionNeedingBody;
@@ -24,6 +26,8 @@
     }
     _delegate = newDelegate;
 }
+
+#pragma mark Questions
 
 - (void)fetchQuestionsOnTopic:(Topic *)topic
 {
@@ -60,6 +64,37 @@
 - (void)receivedQuestionBodyJSON:(NSString *)objectNotation
 {
     [self.questionBuilder fillInDetailsForQuestion:self.questionNeedingBody fromJSON:objectNotation];
+}
+
+#pragma mark Answers
+
+- (void)fetchAnswersForQuestion:(Question *)question
+{
+  self.questionToFill = question;
+  [self.communicator downloadAnswersToQuestionWithID:question.questionID];
+}
+
+- (void)fetchingAnswersFailedWithError:(NSError *)error
+{
+  self.questionToFill = nil;
+  NSDictionary *userInfo = nil;
+  if (error) {
+    userInfo = [NSDictionary dictionaryWithObject: error forKey: NSUnderlyingErrorKey];
+  }
+  NSError *reportableError = [NSError errorWithDomain:StackOverflowManagerError code:StackOverflowManagerErrorAnswerFetchCode userInfo:userInfo];
+  [self.delegate retrievingAnswersFailedWithError:reportableError];
+}
+
+- (void)receivedAnswerListJSON: (NSString *)objectNotation
+{
+  NSError *error = nil;
+  if ([self.answerBuilder addAnswersToQuestion:self.questionToFill fromJSON:objectNotation error:&error]) {
+    [self.delegate answersReceivedForQuestion:self.questionToFill];
+    self.questionToFill = nil;
+  }
+  else {
+    [self fetchingAnswersFailedWithError:error];
+  }
 }
 
 // Private
