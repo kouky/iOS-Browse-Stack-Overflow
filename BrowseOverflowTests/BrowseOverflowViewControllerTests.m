@@ -13,6 +13,7 @@
 #import "Question.h"
 #import "QuestionListTableDataSource.h"
 #import "QuestionDetailDataSource.h"
+#import "BrowseOverflowObjectConfiguration.h"
 #import <objc/runtime.h>
 
 static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociatedNotificationKey";
@@ -281,6 +282,24 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   BrowseOverflowViewController *nextVC = (BrowseOverflowViewController *)navController.topViewController;
   XCTAssertTrue([nextVC.dataSource isKindOfClass:[QuestionDetailDataSource class]], @"Selecting a question should show details of that question");
   XCTAssertEqualObjects([(QuestionDetailDataSource *)nextVC.dataSource question], sampleQuestion, @"Details should be shown for the selected question");
+}
+
+- (void)testSelectingTopicNotificationPassesObjectConfigurationToNewViewController
+{
+  BrowseOverflowObjectConfiguration *objectConfiguration = [[BrowseOverflowObjectConfiguration alloc] init];
+  viewController.objectConfiguration = objectConfiguration;
+  [viewController userDidSelectTopicNotification:nil];
+  BrowseOverflowViewController *newTopVC = (BrowseOverflowViewController *)navController.topViewController;
+  XCTAssertEqualObjects(newTopVC.objectConfiguration, objectConfiguration, @"The object configuration should be passed through to the new view controller");
+}
+
+- (void)testSelectingQuestionNotificationPassesObjectConfigurationToNewViewController
+{
+  BrowseOverflowObjectConfiguration *objectConfiguration = [[BrowseOverflowObjectConfiguration alloc] init];
+  viewController.objectConfiguration = objectConfiguration;
+  [viewController userDidSelectQuestionNotification:nil];
+  BrowseOverflowViewController *newTopVC = (BrowseOverflowViewController *)navController.topViewController;
+  XCTAssertEqualObjects(newTopVC.objectConfiguration, objectConfiguration, @"The object configuration should be passed through to the new view controller");
 }
 
 @end
