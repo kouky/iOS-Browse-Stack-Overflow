@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "StackOverflowManagerDelegate.h"
+#import "StackOverflowCommunicatorDelegate.h"
 
 @class StackOverflowCommunicator;
 @class Topic;
@@ -15,7 +16,7 @@
 @class QuestionBuilder;
 @class AnswerBuilder;
 
-@interface StackOverflowManager : NSObject
+@interface StackOverflowManager : NSObject <StackOverflowCommunicatorDelegate>
 
 @property (nonatomic, weak) id <StackOverflowManagerDelegate> delegate;
 @property (strong) StackOverflowCommunicator *communicator;
