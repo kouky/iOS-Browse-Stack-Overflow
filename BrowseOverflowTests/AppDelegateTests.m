@@ -66,4 +66,10 @@
   XCTAssertFalse([dataSource tableView:nil numberOfRowsInSection:0] == 0, @"There should be some rows to display");
 }
 
+- (void)testFirstViewControllerHasAnObjectConfiguration
+{
+  BrowseOverflowViewController *topicViewController = (BrowseOverflowViewController *)[appDelegate.navigationController topViewController];
+  XCTAssertNotNil(topicViewController.objectConfiguration, @"The view controller should have an object configuration instance");
+}
+
 @end

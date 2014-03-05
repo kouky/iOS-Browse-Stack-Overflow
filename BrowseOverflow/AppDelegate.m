@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BrowseOverflowViewController.h"
+#import "BrowseOverflowObjectConfiguration.h"
 #import "Topic.h"
 
 @implementation AppDelegate
@@ -32,6 +33,7 @@
   // Override point for customization after application launch.
   self.navigationController = [[UINavigationController alloc] init];
   BrowseOverflowViewController *firstViewController = [[BrowseOverflowViewController alloc] initWithNibName:nil bundle:nil];
+  firstViewController.objectConfiguration = [[BrowseOverflowObjectConfiguration alloc] init];
   TopicTableDataSource *dataSource = [[TopicTableDataSource alloc] init];
   [dataSource setTopics:[self topics]];
   firstViewController.dataSource = dataSource;
