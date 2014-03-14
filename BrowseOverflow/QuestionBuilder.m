@@ -22,11 +22,15 @@
     NSDictionary *parsedObject = (id)jsonObject;
     if (parsedObject == nil) {
         if (error != NULL) {
-            *error = [NSError errorWithDomain:QuestionBuilderErrorDomain code:QuestionBuilderInvalidJSONError userInfo:nil];
+            NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity: 1];
+            if (localError != nil) {
+                [userInfo setObject: localError forKey: NSUnderlyingErrorKey];
+            }
+            *error = [NSError errorWithDomain:QuestionBuilderErrorDomain code: QuestionBuilderInvalidJSONError userInfo: userInfo];
         }
         return nil;
     }
-    
+
     NSArray *questions = parsedObject[@"questions"];
     if (questions == nil) {
         if (error != NULL) {
