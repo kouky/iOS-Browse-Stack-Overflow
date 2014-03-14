@@ -39,7 +39,7 @@ enum {
     [[NSBundle bundleForClass:[self class]] loadNibNamed: @"QuestionDetailCell" owner:self options:nil];
     [self.detailCell.bodyWebView loadHTMLString: [self HTMLStringForSnippet:self.question.body] baseURL:nil];
     self.detailCell.titleLabel.text = self.question.title;
-    self.detailCell.scoreLabel.text = [NSString stringWithFormat:@"%i", self.question.score];
+    self.detailCell.scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)self.question.score];
     self.detailCell.nameLabel.text = self.question.asker.name;
     self.detailCell.avatarView.image = [UIImage imageWithData: [self.avatarStore dataForURL:self.question.asker.avatarURL]];
     cell = self.detailCell;
@@ -48,7 +48,7 @@ enum {
   else if (indexPath.section == answerSection) {
     Answer *thisAnswer = [self.question.answers objectAtIndex: indexPath.row];
     [[NSBundle bundleForClass:[self class]] loadNibNamed:@"AnswerCell" owner:self options:nil];
-    self.answerCell.scoreLabel.text = [NSString stringWithFormat:@"%d", thisAnswer.score];
+    self.answerCell.scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)thisAnswer.score];
     self.answerCell.acceptedIndicator.hidden = !thisAnswer.accepted;
     Person *answerer = thisAnswer.person;
     self.answerCell.personName.text = answerer.name;

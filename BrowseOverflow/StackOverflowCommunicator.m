@@ -21,7 +21,7 @@
 
 - (void)downloadInformationForQuestionWithID:(NSInteger)questionID
 {
-    [self fetchContentAtURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.stackoverflow.com/1.1/questions/%d?body=true", questionID]] errorHandler: ^(NSError *error) {
+    [self fetchContentAtURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.stackoverflow.com/1.1/questions/%ld?body=true", (long)questionID]] errorHandler: ^(NSError *error) {
       [self.delegate fetchingQuestionBodyFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
       [self.delegate receivedQuestionBodyJSON: objectNotation];
@@ -30,7 +30,7 @@
 
 - (void)downloadAnswersToQuestionWithID:(NSInteger)questionID
 {
-    [self fetchContentAtURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.stackoverflow.com/1.1/questions/%d/answers?body=true", questionID]] errorHandler: ^(NSError *error) {
+    [self fetchContentAtURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.stackoverflow.com/1.1/questions/%ld/answers?body=true", (long)questionID]] errorHandler: ^(NSError *error) {
       [self.delegate fetchingAnswersFailedWithError:error];
     } successHandler:^(NSString *objectNotation) {
       [self.delegate receivedAnswerListJSON: objectNotation];
