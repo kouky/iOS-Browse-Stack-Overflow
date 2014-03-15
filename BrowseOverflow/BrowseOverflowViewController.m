@@ -9,6 +9,8 @@
 #import "BrowseOverflowViewController.h"
 #import "QuestionListTableDataSource.h"
 #import "QuestionDetailDataSource.h"
+#import "BrowseOverflowObjectConfiguration.h"
+#import "StackOverflowManager.h"
 #import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
@@ -66,6 +68,23 @@
   if ([self.dataSource isKindOfClass:[QuestionListTableDataSource class]]) {
     QuestionListTableDataSource *questionListTableDataSource = (QuestionListTableDataSource *)self.dataSource;
     questionListTableDataSource.tableView = self.tableView;
+  }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  
+  self.manager = [self.objectConfiguration stackOverflowManager];
+  
+  if ([self.dataSource isKindOfClass:[QuestionListTableDataSource class]]) {
+    Topic *selectedTopic = [(QuestionListTableDataSource *)self.dataSource topic];
+    [self.manager fetchQuestionsOnTopic:selectedTopic];
+  }
+  else if ([self.dataSource isKindOfClass: [QuestionDetailDataSource class]]) {
+    Question *selectedQuestion = [(QuestionDetailDataSource *)self.dataSource question];
+    [self.manager fetchBodyForQuestion:selectedQuestion];
+    [self.manager fetchAnswersForQuestion:selectedQuestion];
   }
 }
 

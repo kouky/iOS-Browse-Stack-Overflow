@@ -9,13 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "StackOverflowCommunicatorDelegate.h"
 
+@class Topic;
+@class Question;
+
 @interface MockStackOverflowManager : NSObject <StackOverflowCommunicatorDelegate> {
-    NSInteger topicFailureErrorCode;
-    NSInteger bodyFailureErrorCode;
-    NSInteger answerFailureErrorCode;
-    NSString *topicSearchString;
-    NSString *questionBodyString;
-    NSString *answerListString;
+  NSInteger topicFailureErrorCode;
+  NSInteger bodyFailureErrorCode;
+  NSInteger answerFailureErrorCode;
+  NSString *topicSearchString;
+  NSString *questionBodyString;
+  NSString *answerListString;
+  BOOL wasAskedToFetchQuestions;
+  BOOL wasAskedToFetchAnswers;
+  BOOL wasAskedToFetchBody;
 }
 
 - (NSInteger)topicFailureErrorCode;
@@ -24,5 +30,12 @@
 - (NSString *)topicSearchString;
 - (NSString *)questionBodyString;
 - (NSString *)answerListString;
+
+- (BOOL)didFetchQuestions;
+- (BOOL)didFetchQuestionBody;
+- (BOOL)didFetchAnswers;
+- (void)fetchQuestionsOnTopic:(Topic *)topic;
+- (void)fetchBodyForQuestion:(Question *)question;
+- (void)fetchAnswersForQuestion:(Question *)question;
 
 @end

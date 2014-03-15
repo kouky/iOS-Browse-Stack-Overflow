@@ -7,31 +7,68 @@
 //
 
 #import "MockStackOverflowManager.h"
+#import "Topic.h"
 
 @implementation MockStackOverflowManager
 
-- (NSInteger)topicFailureErrorCode {
+- (NSInteger)topicFailureErrorCode
+{
     return topicFailureErrorCode;
 }
 
-- (NSInteger)bodyFailureErrorCode {
+- (NSInteger)bodyFailureErrorCode
+{
     return bodyFailureErrorCode;
 }
 
-- (NSInteger)answerFailureErrorCode {
+- (NSInteger)answerFailureErrorCode
+{
     return answerFailureErrorCode;
 }
 
-- (NSString *)topicSearchString {
+- (NSString *)topicSearchString
+{
     return topicSearchString;
 }
 
-- (NSString *)questionBodyString {
+- (NSString *)questionBodyString
+{
     return questionBodyString;
 }
 
-- (NSString *)answerListString {
+- (NSString *)answerListString
+{
     return answerListString;
+}
+
+- (BOOL)didFetchQuestions
+{
+  return wasAskedToFetchQuestions;
+}
+
+- (void)fetchQuestionsOnTopic:(Topic *)topic
+{
+  wasAskedToFetchQuestions = YES;
+}
+
+- (BOOL)didFetchQuestionBody
+{
+  return wasAskedToFetchBody;
+}
+
+- (void)fetchBodyForQuestion:(Question *)question
+{
+  wasAskedToFetchBody = YES;
+}
+
+- (BOOL)didFetchAnswers
+{
+  return wasAskedToFetchAnswers;
+}
+
+- (void)fetchAnswersForQuestion:(Question *)question
+{
+  wasAskedToFetchAnswers = YES;
 }
 
 // Delegate methods

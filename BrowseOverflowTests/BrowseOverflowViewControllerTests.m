@@ -14,11 +14,14 @@
 #import "QuestionListTableDataSource.h"
 #import "QuestionDetailDataSource.h"
 #import "BrowseOverflowObjectConfiguration.h"
+#import "TestObjectConfiguration.h"
+#import "MockStackOverflowManager.h"
 #import <objc/runtime.h>
 
 static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociatedNotificationKey";
 static const char *viewDidAppearKey = "BrowseOverflowViewControllerTestsViewDidAppearKey";
 static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsViewWillDisappearKey";
+static const char *viewWillAppearKey = "BrowseOverflowViewControllerTestsViewWillAppearKey";
 
 #pragma mark Categories on BrowseOverflowController
 
@@ -50,6 +53,12 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   objc_setAssociatedObject(self, viewWillDisappearKey, paramter, OBJC_ASSOCIATION_RETAIN);
 }
 
+- (void)browseOverflowViewControllerTests_viewWillAppear: (BOOL)animated
+{
+  NSNumber *parameter = [NSNumber numberWithBool:animated];
+  objc_setAssociatedObject(self, viewWillAppearKey, parameter, OBJC_ASSOCIATION_RETAIN);
+}
+
 @end
 
 # pragma mark Tests
@@ -60,9 +69,13 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   id <UITableViewDataSource, UITableViewDataSource> dataSource;
   SEL realViewDidAppear, testViewDidAppear;
   SEL realViewWillDisappear, testViewWillDisappear;
+  SEL realViewWillAppear, testViewWillAppear;
   SEL realUserDidSelectTopic, testUserDidSelectTopic;
   SEL realUserDidSelectQuestion, testUserDidSelectQuestion;
   UINavigationController *navController;
+  BrowseOverflowObjectConfiguration *objectConfiguration;
+  TestObjectConfiguration *testConfiguration;
+  MockStackOverflowManager *manager;
   Question *question;
 }
 
@@ -100,6 +113,10 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
                                                         selector:realViewWillDisappear
                                                      andSelector:testViewWillDisappear];
   
+  realViewWillAppear = @selector(viewWillAppear:);
+  testViewWillAppear = @selector(browseOverflowViewControllerTests_viewWillAppear:);
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass: [UIViewController class] selector:realViewWillAppear andSelector:testViewWillAppear];
+  
   realUserDidSelectTopic = @selector(userDidSelectTopicNotification:);
   testUserDidSelectTopic = @selector(browseOverflowControllerTests_userDidSelectTopicNotification:);
   
@@ -107,6 +124,11 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   testUserDidSelectQuestion = @selector(browseOverflowControllerTests_userDidSelectQuestionNotification:);
 
   navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+  objectConfiguration = [[BrowseOverflowObjectConfiguration alloc] init];
+  viewController.objectConfiguration = objectConfiguration;
+  testConfiguration = [[TestObjectConfiguration alloc] init];
+  manager = [[MockStackOverflowManager alloc] init];
+  testConfiguration.objectToReturn = manager;
   
   question = [[Question alloc] init];
 }
@@ -125,6 +147,10 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
   [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[UIViewController class]
                                                         selector:realViewWillDisappear
                                                      andSelector:testViewWillDisappear];
+  
+  [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[UIViewController class]
+                                                        selector:realViewWillAppear
+                                                     andSelector:testViewWillAppear];
   
   navController = nil;
   // Put teardown code here; it will be run once, after the last test case.
@@ -286,8 +312,6 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 
 - (void)testSelectingTopicNotificationPassesObjectConfigurationToNewViewController
 {
-  BrowseOverflowObjectConfiguration *objectConfiguration = [[BrowseOverflowObjectConfiguration alloc] init];
-  viewController.objectConfiguration = objectConfiguration;
   [viewController userDidSelectTopicNotification:nil];
   BrowseOverflowViewController *newTopVC = (BrowseOverflowViewController *)navController.topViewController;
   XCTAssertEqualObjects(newTopVC.objectConfiguration, objectConfiguration, @"The object configuration should be passed through to the new view controller");
@@ -295,11 +319,63 @@ static const char *viewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 
 - (void)testSelectingQuestionNotificationPassesObjectConfigurationToNewViewController
 {
-  BrowseOverflowObjectConfiguration *objectConfiguration = [[BrowseOverflowObjectConfiguration alloc] init];
-  viewController.objectConfiguration = objectConfiguration;
   [viewController userDidSelectQuestionNotification:nil];
   BrowseOverflowViewController *newTopVC = (BrowseOverflowViewController *)navController.topViewController;
   XCTAssertEqualObjects(newTopVC.objectConfiguration, objectConfiguration, @"The object configuration should be passed through to the new view controller");
+}
+
+- (void)testViewWillAppearCreatesAStackOverflowManager
+{
+  [viewController viewWillAppear:YES];
+  XCTAssertNotNil(viewController.manager, @"Set up a stack overflow manager before the view appears");
+}
+
+- (void)testViewWillAppearCallsSuper
+{
+  [viewController viewWillAppear:NO];
+  XCTAssertNotNil(objc_getAssociatedObject(viewController, viewWillAppearKey), @"-viewWillAppear: is documented to require a call to super");
+}
+
+- (void)testViewWillAppearOnQuestionInitiatesLoadingOfQuestions
+{
+  viewController.objectConfiguration = testConfiguration;
+  viewController.dataSource = [[QuestionListTableDataSource alloc] init];
+  [viewController viewWillAppear:YES];
+  XCTAssertTrue([manager didFetchQuestions], @"View controller show have arranged for question content to be downloaded");
+}
+
+- (void)testViewWillAppearOnQuestionDetailInitiatesLoadingOfAnswersAndBody
+{
+  viewController.objectConfiguration = testConfiguration;
+  viewController.dataSource = [[QuestionDetailDataSource alloc] init];
+  [viewController viewWillAppear:YES];
+  XCTAssertTrue([manager didFetchQuestionBody], @"View controller should arrange for question detail to be loaded");
+  XCTAssertTrue([manager didFetchAnswers], @"View controller should arrange for answers to be loaded");
+}
+
+- (void)testQuestionsNotLoadedForDetailView
+{
+  viewController.objectConfiguration = testConfiguration;
+  viewController.dataSource = [[QuestionDetailDataSource alloc] init];
+  [viewController viewWillAppear:YES];
+  XCTAssertFalse([manager didFetchQuestions], @"Don't load question when displaying answers");
+}
+
+- (void)testDetailsNotLoadedForQuestionListView
+{
+  viewController.objectConfiguration = testConfiguration;
+  viewController.dataSource = [[QuestionListTableDataSource alloc] init];
+  [viewController viewWillAppear:YES];
+  XCTAssertFalse([manager didFetchQuestionBody], @"View controller should not arrange for question detail to be loaded");
+  XCTAssertFalse([manager didFetchAnswers], @"View controller should not arrange for answers to be loaded");
+}
+
+- (void)testNoDataLoadedForTopicListView
+{
+  viewController.objectConfiguration = testConfiguration;
+  XCTAssertFalse([manager didFetchQuestions], @"Don't load question when displaying topics");
+  XCTAssertFalse([manager didFetchQuestionBody], @"View controller should not arrange for question detail to be loaded");
+  XCTAssertFalse([manager didFetchAnswers], @"View controller should not arrange for answers to be loaded");
 }
 
 @end
