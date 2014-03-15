@@ -134,19 +134,29 @@
   [self.tableView reloadData];
 }
 
-- (void)fetchQuestionsFailedWithError:(NSError *)error
-{
-  
-}
-
 - (void)answersReceivedForQuestion:(Question *)question
 {
-  
+  [self.tableView reloadData];
+}
+
+- (void)bodyReceivedForQuestion:(Question *)question
+{
+ [self.tableView reloadData];
+}
+
+- (void)fetchingQuestionsFailedWithError:(NSError *)error
+{
+  // No-op
 }
 
 - (void)retrievingAnswersFailedWithError:(NSError *)error
 {
-  
+  // No-op
+}
+
+- (void)fetchingQuestionBodyFailedWithError:(NSError *)error
+{
+  // No-op
 }
 
 @end

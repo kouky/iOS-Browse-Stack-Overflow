@@ -413,4 +413,24 @@ static const char *viewWillAppearKey = "BrowseOverflowViewControllerTestsViewWil
   XCTAssertTrue([watcher didReceiveReloadData], @"Table view was reloaded after fetching new data");
 }
 
+- (void)testTableViewReloadedWhenAnswersReceived
+{
+  QuestionDetailDataSource *detailDataSource = [[QuestionDetailDataSource alloc] init];
+  viewController.dataSource = detailDataSource;
+  ReloadDataWatcher *watcher = [[ReloadDataWatcher alloc] init];
+  viewController.tableView = (UITableView *)watcher;
+  [viewController answersReceivedForQuestion:nil];
+  XCTAssertTrue([watcher didReceiveReloadData], @"Table view data was reloaded after fetching new answers");
+}
+
+- (void)testTableReloadedWhenQuestionBodyReceived
+{
+  QuestionDetailDataSource *detailDataSource = [[QuestionDetailDataSource alloc] init];
+  viewController.dataSource = detailDataSource;
+  ReloadDataWatcher *watcher = [[ReloadDataWatcher alloc] init];
+  viewController.tableView = (UITableView *)watcher;
+  [viewController bodyReceivedForQuestion:nil];
+  XCTAssertTrue([watcher didReceiveReloadData], @"Table reloaded when question body received");
+}
+
 @end

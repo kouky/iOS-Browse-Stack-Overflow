@@ -108,7 +108,7 @@
     NSError *reportableError = [NSError errorWithDomain:StackOverflowManagerError
                                                    code:StackOverflowManagerErrorQuestionSearchCode
                                                userInfo:errorInfo];
-    [self.delegate fetchQuestionsFailedWithError:reportableError];
+    [self.delegate fetchingQuestionsFailedWithError:reportableError];
 }
 
 @end
