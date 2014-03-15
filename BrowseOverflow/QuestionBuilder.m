@@ -24,7 +24,7 @@
         if (error != NULL) {
             NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity: 1];
             if (localError != nil) {
-                [userInfo setObject: localError forKey: NSUnderlyingErrorKey];
+                [userInfo setObject: localError forKey:NSUnderlyingErrorKey];
             }
             *error = [NSError errorWithDomain:QuestionBuilderErrorDomain code: QuestionBuilderInvalidJSONError userInfo: userInfo];
         }
