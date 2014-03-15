@@ -16,6 +16,8 @@
 #import "BrowseOverflowObjectConfiguration.h"
 #import "TestObjectConfiguration.h"
 #import "MockStackOverflowManager.h"
+#import "StackOverflowManager.h"
+#import "StackOverflowManagerDelegate.h"
 #import <objc/runtime.h>
 
 static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociatedNotificationKey";
@@ -376,6 +378,17 @@ static const char *viewWillAppearKey = "BrowseOverflowViewControllerTestsViewWil
   XCTAssertFalse([manager didFetchQuestions], @"Don't load question when displaying topics");
   XCTAssertFalse([manager didFetchQuestionBody], @"View controller should not arrange for question detail to be loaded");
   XCTAssertFalse([manager didFetchAnswers], @"View controller should not arrange for answers to be loaded");
+}
+
+- (void)testViewControllerConformsToStackOverflowManagerDelegateProtocol
+{
+  XCTAssertTrue([viewController conformsToProtocol:@protocol(StackOverflowManagerDelegate)], @"View controllers need to be StackOverflowManagerDelegates");
+}
+
+- (void)testViewControllerConfiguredAsStackOverflowManagerDelegateOnManagerCreation
+{
+  [viewController viewWillAppear:YES];
+  XCTAssertEqualObjects(viewController.manager.delegate, viewController, @"View controller sets itself as the manager's delegate");
 }
 
 @end

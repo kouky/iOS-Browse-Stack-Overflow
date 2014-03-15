@@ -76,6 +76,7 @@
   [super viewWillAppear:animated];
   
   self.manager = [self.objectConfiguration stackOverflowManager];
+  self.manager.delegate = self;
   
   if ([self.dataSource isKindOfClass:[QuestionListTableDataSource class]]) {
     Topic *selectedTopic = [(QuestionListTableDataSource *)self.dataSource topic];
@@ -119,6 +120,28 @@
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+# pragma mark StackOverflowManagerDelegate methods
+
+- (void)didReceiveQuestions:(NSArray *)questions
+{
+  
+}
+
+- (void)fetchQuestionsFailedWithError:(NSError *)error
+{
+  
+}
+
+- (void)answersReceivedForQuestion:(Question *)question
+{
+  
+}
+
+- (void)retrievingAnswersFailedWithError:(NSError *)error
+{
+  
 }
 
 @end
