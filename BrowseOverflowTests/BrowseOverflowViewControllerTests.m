@@ -433,4 +433,20 @@ static const char *viewWillAppearKey = "BrowseOverflowViewControllerTestsViewWil
   XCTAssertTrue([watcher didReceiveReloadData], @"Table reloaded when question body received");
 }
 
+- (void)testQuestionListViewIsGivenAnAvatarStore
+{
+  QuestionListTableDataSource *listDataSource = [[QuestionListTableDataSource alloc] init];
+  viewController.dataSource = listDataSource;
+  [viewController viewWillAppear:YES];
+  XCTAssertNotNil(listDataSource.avatarStore, @"The avatarStore property should be configured in -viewWillAppear:");
+}
+
+- (void)testQuestionDetailViewIsGivenAnAvatarStore
+{
+  QuestionDetailDataSource *detailDataSource = [[QuestionDetailDataSource alloc] init];
+  viewController.dataSource = detailDataSource;
+  [viewController viewWillAppear:YES];
+  XCTAssertNotNil(detailDataSource.avatarStore, @"The avatarStore property should be configured in -viewWillAppear:");
+}
+
 @end
