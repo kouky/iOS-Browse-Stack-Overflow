@@ -20,5 +20,10 @@
     return fetchingConnection;
 }
 
+- (NSMutableData *)receivedData
+{
+  return receivedData;
+}
+
 
 @end

@@ -150,4 +150,11 @@
     XCTAssertEqualObjects(combinedString, @"Result appended", @"Received data should be appended to the downloaded data");
 }
 
+- (void)testReceivingResponseWith200InitialisesReceivedDataObject
+{
+  FakeURLResponse *twoHundredResponse = [[FakeURLResponse alloc] initWithStatusCode: 200];
+  [communicator connection:nil didReceiveResponse:(NSURLResponse *)twoHundredResponse];
+  XCTAssertNotNil(communicator.receivedData, "Recieved data should be initialised on a 200 response");
+}
+
 @end

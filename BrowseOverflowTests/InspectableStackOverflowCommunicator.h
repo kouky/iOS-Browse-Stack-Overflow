@@ -11,4 +11,5 @@
 @interface InspectableStackOverflowCommunicator : StackOverflowCommunicator
 - (NSURL *)URLToFetch;
 - (NSURLConnection *)currentURLConnection;
+- (NSMutableData *)receivedData;
 @end

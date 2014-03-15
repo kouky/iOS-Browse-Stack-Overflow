@@ -58,6 +58,9 @@
         errorHandler(error);
         [self cancelAndDiscardURLConnection];
     }
+    else {
+      receivedData = [[NSMutableData alloc] init];
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
