@@ -11,6 +11,7 @@
 #import "QuestionDetailDataSource.h"
 #import "BrowseOverflowObjectConfiguration.h"
 #import "StackOverflowManager.h"
+#import "Topic.h"
 #import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
@@ -126,7 +127,11 @@
 
 - (void)didReceiveQuestions:(NSArray *)questions
 {
-  
+  Topic *topic = ((QuestionListTableDataSource *)self.dataSource).topic;
+  for (Question *thisQuestion in questions) {
+    [topic addQuestion:thisQuestion];
+  }
+  [self.tableView reloadData];
 }
 
 - (void)fetchQuestionsFailedWithError:(NSError *)error

@@ -18,6 +18,7 @@
 #import "MockStackOverflowManager.h"
 #import "StackOverflowManager.h"
 #import "StackOverflowManagerDelegate.h"
+#import "ReloadDataWatcher.h"
 #import <objc/runtime.h>
 
 static const char *notificationKey = "BrowseOverflowViewControllerTestsAssociatedNotificationKey";
@@ -389,6 +390,27 @@ static const char *viewWillAppearKey = "BrowseOverflowViewControllerTestsViewWil
 {
   [viewController viewWillAppear:YES];
   XCTAssertEqualObjects(viewController.manager.delegate, viewController, @"View controller sets itself as the manager's delegate");
+}
+
+- (void)testDownloadedQuestionsAreAddedToTopic
+{
+  QuestionListTableDataSource *topicDataSource = [[QuestionListTableDataSource alloc] init];
+  viewController.dataSource = topicDataSource;
+  Topic *topic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
+  topicDataSource.topic = topic;
+  Question *question1 = [[Question alloc] init];
+  [viewController didReceiveQuestions:@[question1]];
+  XCTAssertEqualObjects([topic.recentQuestions lastObject], question1, @"Question was added to the topic");
+}
+
+- (void)testTableViewReloadedWhenQuestionsReceived
+{
+  QuestionListTableDataSource *topicDataSource = [[QuestionListTableDataSource alloc] init];
+  viewController.dataSource = topicDataSource;
+  ReloadDataWatcher *watcher = [[ReloadDataWatcher alloc] init];
+  viewController.tableView = (UITableView *)watcher;
+  [viewController didReceiveQuestions:[NSArray array]];
+  XCTAssertTrue([watcher didReceiveReloadData], @"Table view was reloaded after fetching new data");
 }
 
 @end
