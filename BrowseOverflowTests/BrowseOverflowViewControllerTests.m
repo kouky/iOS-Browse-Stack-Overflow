@@ -192,11 +192,12 @@ static const char *viewWillAppearKey = "BrowseOverflowViewControllerTestsViewWil
   XCTAssertEqualObjects(questionDataSource.tableView, tableView, @"Backlink to tableview should be set in datasource");
 }
 
-- (void)testDefaultStateOfViewControllerDoesNotReceiveNotifications
+- (void)testDefaultStateOfViewControllerDoesNotReceiveTopicSelectionNotifications
 {
+  question = [[Question alloc] init];
   [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
   [[NSNotificationCenter defaultCenter] postNotificationName:TopicTableDidSelectTopicNotification
-                                                      object:nil
+                                                      object:question
                                                     userInfo:nil];
   XCTAssertNil(objc_getAssociatedObject(viewController, notificationKey), @"Notification should not be received before -viewDidAppear:");
   [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:realUserDidSelectTopic andSelector:testUserDidSelectTopic];
@@ -447,6 +448,14 @@ static const char *viewWillAppearKey = "BrowseOverflowViewControllerTestsViewWil
   viewController.dataSource = detailDataSource;
   [viewController viewWillAppear:YES];
   XCTAssertNotNil(detailDataSource.avatarStore, @"The avatarStore property should be configured in -viewWillAppear:");
+}
+
+- (void)testViewControllerHooksUpQuestionListNotificationCenterInViewDidAppear
+{
+  QuestionListTableDataSource *questionDataSource = [[QuestionListTableDataSource alloc] init];
+  viewController.dataSource = questionDataSource;
+  [viewController viewDidAppear:YES];
+  XCTAssertEqualObjects(questionDataSource.notificationCenter, [NSNotificationCenter defaultCenter], @"");
 }
 
 @end

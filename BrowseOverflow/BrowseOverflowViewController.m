@@ -105,6 +105,10 @@
                                            selector: @selector(userDidSelectQuestionNotification:)
                                                name: QuestionListDidSelectQuestionNotification
                                              object: nil];
+  
+  if ([self.dataSource isKindOfClass:[QuestionListTableDataSource class]]) {
+    ((QuestionListTableDataSource *)self.dataSource).notificationCenter = [NSNotificationCenter defaultCenter];
+  }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
