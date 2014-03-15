@@ -49,6 +49,7 @@
 		2779DD1118B5FC8B00FA1408 /* QuestionListTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779DD1018B5FC8B00FA1408 /* QuestionListTableDataSource.m */; };
 		2779DD1218B5FC8B00FA1408 /* QuestionListTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779DD1018B5FC8B00FA1408 /* QuestionListTableDataSource.m */; };
 		277E2004189A22960042983A /* MockStackOverflowManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 277E2003189A22960042983A /* MockStackOverflowManagerDelegate.m */; };
+		277E535A18D3D3F9003CD706 /* TestObjectConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 277E535918D3D3F9003CD706 /* TestObjectConfiguration.m */; };
 		27B7CB0B189F0B0E00A3824E /* QuestionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B7CB0A189F0B0E00A3824E /* QuestionBuilder.m */; };
 		27B7CB0C189F0B0E00A3824E /* QuestionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B7CB0A189F0B0E00A3824E /* QuestionBuilder.m */; };
 		27B7CB0F189F0BFD00A3824E /* FakeQuestionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B7CB0E189F0BFD00A3824E /* FakeQuestionBuilder.m */; };
@@ -156,6 +157,8 @@
 		277E1FFD189A136D0042983A /* StackOverflowManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowManagerDelegate.h; sourceTree = "<group>"; };
 		277E2002189A22960042983A /* MockStackOverflowManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockStackOverflowManagerDelegate.h; sourceTree = "<group>"; };
 		277E2003189A22960042983A /* MockStackOverflowManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockStackOverflowManagerDelegate.m; sourceTree = "<group>"; };
+		277E535818D3D3F9003CD706 /* TestObjectConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjectConfiguration.h; sourceTree = "<group>"; };
+		277E535918D3D3F9003CD706 /* TestObjectConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObjectConfiguration.m; sourceTree = "<group>"; };
 		27B7CB09189F0B0E00A3824E /* QuestionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionBuilder.h; sourceTree = "<group>"; };
 		27B7CB0A189F0B0E00A3824E /* QuestionBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionBuilder.m; sourceTree = "<group>"; };
 		27B7CB0D189F0BFD00A3824E /* FakeQuestionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeQuestionBuilder.h; sourceTree = "<group>"; };
@@ -399,6 +402,8 @@
 				27FF881B18B855B30064B397 /* Graham_Lee.jpg */,
 				27D093BA18BAC84000F16631 /* FakeGravatarDelegate.h */,
 				27D093BB18BAC84000F16631 /* FakeGravatarDelegate.m */,
+				277E535818D3D3F9003CD706 /* TestObjectConfiguration.h */,
+				277E535918D3D3F9003CD706 /* TestObjectConfiguration.m */,
 			);
 			name = Mocks;
 			sourceTree = "<group>";
@@ -543,6 +548,7 @@
 				27B7CB0F189F0BFD00A3824E /* FakeQuestionBuilder.m in Sources */,
 				270A472C189749F300D9CB53 /* AnswerTests.m in Sources */,
 				27B7CB14189F3F3600A3824E /* QuestionBuilderTests.m in Sources */,
+				277E535A18D3D3F9003CD706 /* TestObjectConfiguration.m in Sources */,
 				27FF881A18B841380064B397 /* AvatarStore.m in Sources */,
 				27D093BC18BAC84000F16631 /* FakeGravatarDelegate.m in Sources */,
 				276B7AC818C4595000B2F792 /* AnswerBuilder.m in Sources */,
