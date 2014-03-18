@@ -20,6 +20,7 @@
 
 @property (nonatomic, weak) id <StackOverflowManagerDelegate> delegate;
 @property (strong) StackOverflowCommunicator *communicator;
+@property (strong) StackOverflowCommunicator *bodyCommunicator;
 @property (strong) QuestionBuilder *questionBuilder;
 @property (strong) AnswerBuilder *answerBuilder;
 @property (strong) Question *questionToFill;
@@ -40,5 +41,6 @@ extern NSString *StackOverflowManagerError;
 
 enum {
   StackOverflowManagerErrorQuestionSearchCode,
-  StackOverflowManagerErrorAnswerFetchCode
+  StackOverflowManagerErrorAnswerFetchCode,
+  StackOverflowManagerErrorQuestionBodyFetchCode
 };

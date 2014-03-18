@@ -40,9 +40,11 @@
   StackOverflowManager *manager = [configuration stackOverflowManager];
   XCTAssertNotNil(manager, @"The StackOverflowManager should exist");
   XCTAssertNotNil(manager.communicator, @"Manager should have a StackOverflowCommunicator");
+  XCTAssertNotNil(manager.bodyCommunicator, @"Manager should have a second StackOverflowCommunicator");
   XCTAssertNotNil(manager.questionBuilder, @"Manager should have a question builder");
   XCTAssertNotNil(manager.answerBuilder, @"Manager should have an answer builder");
   XCTAssertEqualObjects(manager.communicator.delegate, manager, @"The manager is the communicator's delegate");
+  XCTAssertEqualObjects(manager.bodyCommunicator.delegate, manager, @"The manager is the delegate of the body communicator");
 }
 
 - (void)testConfigurationOfCreatedAvatarStore {

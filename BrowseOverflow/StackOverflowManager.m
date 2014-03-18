@@ -37,7 +37,7 @@
 - (void)fetchBodyForQuestion:(Question *)question
 {
     self.questionNeedingBody = question;
-    [self.communicator downloadInformationForQuestionWithID:question.questionID];
+    [self.bodyCommunicator downloadInformationForQuestionWithID:question.questionID];
 }
 
 - (void)searchingForQuestionsFailedWithError:(NSError *)error
@@ -58,14 +58,20 @@
 
 - (void)fetchingQuestionBodyFailedWithError:(NSError *)error
 {
-    [self tellDelegateAboutQuestionSearchError:error];
+    NSDictionary *errorInfo = nil;
+    if (error) {
+      errorInfo = [NSDictionary dictionaryWithObject: error forKey: NSUnderlyingErrorKey];
+    }
+    NSError *reportableError = [NSError errorWithDomain:StackOverflowManagerError code: StackOverflowManagerErrorQuestionBodyFetchCode userInfo:errorInfo];
+    [self.delegate fetchingQuestionBodyFailedWithError: reportableError];
+    self.questionNeedingBody = nil;
 }
 
 - (void)receivedQuestionBodyJSON:(NSString *)objectNotation
 {
     [self.questionBuilder fillInDetailsForQuestion:self.questionNeedingBody fromJSON:objectNotation];
     [self.delegate bodyReceivedForQuestion:self.questionNeedingBody];
-    self.questionToFill = nil;
+    self.questionNeedingBody = nil;
 }
 
 #pragma mark Answers

@@ -20,6 +20,7 @@
     FakeQuestionBuilder *questionBuilder;
     Question *questionToFetch;
     MockStackOverflowCommunicator *communicator;
+    MockStackOverflowCommunicator *bodyCommunicator;
     NSArray *questionArray;
     NSError *underlyingError;
 }
@@ -34,6 +35,7 @@
     mgr = [[StackOverflowManager alloc] init];
     delegate = [[MockStackOverflowManagerDelegate alloc] init];
     communicator = [[MockStackOverflowCommunicator alloc] init];
+    bodyCommunicator = [[MockStackOverflowCommunicator alloc] init];
     questionBuilder = [[FakeQuestionBuilder alloc] init];
     questionToFetch = [[Question alloc] init];
     questionToFetch.questionID = 1234;
@@ -43,6 +45,7 @@
     mgr.delegate = delegate;
     mgr.questionBuilder = questionBuilder;
     mgr.communicator = communicator;
+    mgr.bodyCommunicator = bodyCommunicator;
 }
 
 - (void)tearDown
@@ -50,6 +53,7 @@
  
     delegate = nil;
     communicator = nil;
+    bodyCommunicator = nil;
     questionBuilder = nil;
     mgr = nil;
     questionToFetch = nil;
@@ -131,7 +135,7 @@
 - (void)testAskingForQuestionBodyMeansRequestingData
 {
     [mgr fetchBodyForQuestion:questionToFetch];
-    XCTAssertTrue([communicator wasAskedToFetchBody], @"The communicator should need to request data for the question body");
+    XCTAssertTrue([bodyCommunicator wasAskedToFetchBody], @"The communicator should need to request data for the question body");
 }
 
 - (void)testDelegateNotifiedOfFailureToFetchQuestion
