@@ -153,4 +153,11 @@
     XCTAssertEqualObjects(questionBuilder.questionToFill, questionToFetch, @"The question should have been passed to the builderi");
 }
 
+- (void)testManagerNotifiesDelegateWhenQuestionBodyIsReceived
+{
+  [mgr fetchBodyForQuestion:questionToFetch];
+  [mgr receivedQuestionBodyJSON: @"Fake JSON"];
+  XCTAssertEqualObjects(delegate.bodyQuestion, questionToFetch, @"Update delegate when question body filled");
+}
+
 @end
