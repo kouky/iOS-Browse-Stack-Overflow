@@ -54,6 +54,7 @@ static NSString *questionJSON = @"{"
     Question *question;
     NSString *stringIsNotJSON;
     NSString *noQuestionsJSONString;
+    NSString *emptyQuestionsArrayJSON;
 }
 
 @end
@@ -68,6 +69,7 @@ static NSString *questionJSON = @"{"
     question = [[questionBuilder questionsFromJSON:questionJSON error:NULL] objectAtIndex:0];
     stringIsNotJSON = @"Not JSON";
     noQuestionsJSONString = @"{ \"noquestions\": true }";
+    emptyQuestionsArrayJSON = @"{ \"questions\": [] }";
 }
 
 - (void)tearDown
@@ -75,6 +77,7 @@ static NSString *questionJSON = @"{"
     questionBuilder = nil;
     question = nil;
     stringIsNotJSON = nil;
+    emptyQuestionsArrayJSON = nil;
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
 }
@@ -156,6 +159,11 @@ static NSString *questionJSON = @"{"
 {
     [questionBuilder fillInDetailsForQuestion:question fromJSON:questionJSON];
     XCTAssertEqualObjects(question.body, @"<p>I've been trying to use persistent keychain references.</p>", @"The correct question body is added");
+}
+
+- (void)testEmptyQuestionsArrayDoesNotCrash
+{
+  XCTAssertNoThrow([questionBuilder fillInDetailsForQuestion:question fromJSON:emptyQuestionsArrayJSON], @"Don't throw an error if no questions are found.");
 }
 
 @end
