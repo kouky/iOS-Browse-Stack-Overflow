@@ -28,9 +28,9 @@
     return self;
 }
 
-- (NSArray *)sortQuestionsLatestFirst:(NSArray *)questionLIst
+- (NSArray *)sortQuestionsLatestFirst:(NSArray *)questionList
 {
-    return [questionLIst sortedArrayUsingComparator: ^(id obj1, id obj2) {
+    return [questionList sortedArrayUsingComparator: ^(id obj1, id obj2) {
         Question *q1 = (Question *)obj1;
         Question *q2 = (Question *)obj2;
         return [q2.date compare: q1.date];
