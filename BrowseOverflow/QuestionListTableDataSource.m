@@ -60,6 +60,11 @@
   }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 132.0f;
+}
+
 - (void)registerForUpdatesToAvatarStore:(AvatarStore *)store
 {
   [self.notificationCenter addObserver:self selector:@selector(avatarStoreDidUpdateContent:) name:AvatarStoreDidUpdateContentNotification object:store];

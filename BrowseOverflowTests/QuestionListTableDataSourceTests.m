@@ -167,6 +167,14 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)testHeightOfAQuestionRowIsAtLeastTheSameAsTheHeightOfTheCell
+{
+  [iPhoneTopic addQuestion:question1];
+  UITableViewCell *cell = [dataSource tableView:nil cellForRowAtIndexPath:firstCell];
+  CGFloat height = [dataSource tableView:nil heightForRowAtIndexPath:firstCell];
+  XCTAssertTrue(height >= cell.frame.size.height, @"Give the table enough space to draw the view.");
+}
+
 @end
 
 
